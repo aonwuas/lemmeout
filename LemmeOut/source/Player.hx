@@ -15,10 +15,10 @@
     {
         super(X, Y, SimpleGraphic);
         loadGraphic("assets/images/GD1_blobMasterSheet.png", true, 32, 32);
-        animation.add("front", [0,0,1,1,0,2,1,3], 7, true);
+        animation.add("front", [0,0,1,1,0,0,1,1,0,2,1,3], 7, true);
         animation.add("back", [4,4,5,5], 7, true);
         animation.add("side", [6,6,7,7], 7, true);
-        animation.add("front_grey", [8,8,9,9,8,10,9,11], 3, true);
+        animation.add("front_grey", [8,8,9,9,8,8,9,9,8,10,9,11], 3, true);
         animation.add("back_grey", [12,12,13,13], 3, true);
         animation.add("side_grey", [14,14,15,15], 3, true);
         animation.play("front"); //starting position
