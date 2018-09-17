@@ -1,18 +1,32 @@
 package;
-import flixel.FlxSprite;
-import flixel.FlxObject;
-import flixel.system.FlxAssets.FlxGraphicAsset;
 
 /**
  * ...
  * @author Anthony Ben Jerry Rachel Steven
  */
-class NPC extends FlxSprite
+class NPC extends Character
 {
 
-	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
+	public function new() 
 	{
-		super(X, Y, SimpleGraphic);
+		super();
+		
+	}
+	
+	public function movement(){
+		
+		
+	}
+	
+	public 
+	
+	class Behavior{
+		//PATROL, LOOK, HUNT, CHASE
+		//PATROL follow set path repeatedly
+		//LOOK stand in place and scan left to right
+		//HUNT walk around trying to find blobby
+		//CHASE blobby found, follow it while running
+		
 		
 	}
 	
