@@ -806,9 +806,9 @@ ApplicationMain.create = function(config) {
 	ManifestResources.init(config);
 	var _this = app.meta;
 	if(__map_reserved["build"] != null) {
-		_this.setReserved("build","1");
+		_this.setReserved("build","44");
 	} else {
-		_this.h["build"] = "1";
+		_this.h["build"] = "44";
 	}
 	var _this1 = app.meta;
 	if(__map_reserved["company"] != null) {
@@ -4108,6 +4108,67 @@ DocumentClass.__super__ = Main;
 DocumentClass.prototype = $extend(Main.prototype,{
 	__class__: DocumentClass
 });
+var Character = function() {
+	this.flxsprite = new flixel_FlxSprite(0,0);
+};
+$hxClasses["Character"] = Character;
+Character.__name__ = ["Character"];
+Character.addToPlayState = function(state,$char) {
+	state.add($char.flxsprite);
+};
+Character.prototype = {
+	flxsprite: null
+	,speed: null
+	,setFlxSprite: function(image_string,is_animated,width,height) {
+		if(is_animated == null) {
+			is_animated = false;
+		}
+		this.flxsprite.loadGraphic(image_string,is_animated,width,height);
+		this.flxsprite.drag.set_x(this.flxsprite.drag.set_y(1600));
+	}
+	,setSpeed: function(spd) {
+		this.speed = spd;
+	}
+	,screenCenter: function() {
+		this.flxsprite.screenCenter();
+	}
+	,addAnim: function(name,frames,fps,looped) {
+		if(looped == null) {
+			looped = false;
+		}
+		this.flxsprite.animation.add(name,frames,fps,looped);
+	}
+	,playAnim: function(name) {
+		this.flxsprite.animation.play(name);
+	}
+	,move: function(direction) {
+		switch(direction) {
+		case 1:
+			this.flxsprite.set_facing(1);
+			this.flxsprite.animation.play("side");
+			this.flxsprite._facingFlip.set(this.flxsprite.facing,{ x : false, y : false});
+			this.flxsprite.velocity.set(-this.speed,0);
+			break;
+		case 16:
+			this.flxsprite.set_facing(16);
+			this.flxsprite.animation.play("side");
+			this.flxsprite._facingFlip.set(this.flxsprite.facing,{ x : true, y : false});
+			this.flxsprite.velocity.set(this.speed,0);
+			break;
+		case 256:
+			this.flxsprite.set_facing(256);
+			this.flxsprite.animation.play("back");
+			this.flxsprite.velocity.set(0,-this.speed);
+			break;
+		case 4096:
+			this.flxsprite.set_facing(4096);
+			this.flxsprite.animation.play("front");
+			this.flxsprite.velocity.set(0,this.speed);
+			break;
+		}
+	}
+	,__class__: Character
+};
 var EReg = function(r,opt) {
 	this.r = new RegExp(r,opt.split("u").join(""));
 };
@@ -4319,7 +4380,7 @@ ManifestResources.init = function(config) {
 	var data;
 	var manifest;
 	var library;
-	data = "{\"name\":null,\"assets\":\"aoy4:pathy34:assets%2Fdata%2Fdata-goes-here.txty4:sizezy4:typey4:TEXTy2:idR1y7:preloadtgoR0y36:assets%2Fimages%2Fimages-go-here.txtR2zR3R4R5R7R6tgoR0y36:assets%2Fmusic%2Fmusic-goes-here.txtR2zR3R4R5R8R6tgoR0y36:assets%2Fsounds%2Fsounds-go-here.txtR2zR3R4R5R9R6tgoR2i2114R3y5:MUSICR5y26:flixel%2Fsounds%2Fbeep.mp3y9:pathGroupaR11y26:flixel%2Fsounds%2Fbeep.ogghR6tgoR2i39706R3R10R5y28:flixel%2Fsounds%2Fflixel.mp3R12aR14y28:flixel%2Fsounds%2Fflixel.ogghR6tgoR2i5794R3y5:SOUNDR5R13R12aR11R13hgoR2i33629R3R16R5R15R12aR14R15hgoR2i15744R3y4:FONTy9:classNamey35:__ASSET__flixel_fonts_nokiafc22_ttfR5y30:flixel%2Ffonts%2Fnokiafc22.ttfR6tgoR2i29724R3R17R18y36:__ASSET__flixel_fonts_monsterrat_ttfR5y31:flixel%2Ffonts%2Fmonsterrat.ttfR6tgoR0y33:flixel%2Fimages%2Fui%2Fbutton.pngR2i519R3y5:IMAGER5R23R6tgoR0y36:flixel%2Fimages%2Flogo%2Fdefault.pngR2i3280R3R24R5R25R6tgh\",\"rootPath\":null,\"version\":2,\"libraryArgs\":[],\"libraryType\":null}";
+	data = "{\"name\":null,\"assets\":\"aoy4:pathy34:assets%2Fdata%2Fdata-goes-here.txty4:sizezy4:typey4:TEXTy2:idR1y7:preloadtgoR0y31:assets%2Fimages%2Fbadsprite.pngR2i3099R3y5:IMAGER5R7R6tgoR0y45:assets%2Fimages%2FGD1_BlobSpriteSheetx100.pngR2i12157R3R8R5R9R6tgoR0y49:assets%2Fimages%2FGD1_BlobSpriteSheet_grey100.pngR2i12056R3R8R5R10R6tgoR0y36:assets%2Fimages%2Fimages-go-here.txtR2zR3R4R5R11R6tgoR0y36:assets%2Fmusic%2Fmusic-goes-here.txtR2zR3R4R5R12R6tgoR0y36:assets%2Fsounds%2Fsounds-go-here.txtR2zR3R4R5R13R6tgoR2i2114R3y5:MUSICR5y26:flixel%2Fsounds%2Fbeep.mp3y9:pathGroupaR15y26:flixel%2Fsounds%2Fbeep.ogghR6tgoR2i39706R3R14R5y28:flixel%2Fsounds%2Fflixel.mp3R16aR18y28:flixel%2Fsounds%2Fflixel.ogghR6tgoR2i5794R3y5:SOUNDR5R17R16aR15R17hgoR2i33629R3R20R5R19R16aR18R19hgoR2i15744R3y4:FONTy9:classNamey35:__ASSET__flixel_fonts_nokiafc22_ttfR5y30:flixel%2Ffonts%2Fnokiafc22.ttfR6tgoR2i29724R3R21R22y36:__ASSET__flixel_fonts_monsterrat_ttfR5y31:flixel%2Ffonts%2Fmonsterrat.ttfR6tgoR0y33:flixel%2Fimages%2Fui%2Fbutton.pngR2i519R3R8R5R27R6tgoR0y36:flixel%2Fimages%2Flogo%2Fdefault.pngR2i3280R3R8R5R28R6tgh\",\"rootPath\":null,\"version\":2,\"libraryArgs\":[],\"libraryType\":null}";
 	manifest = lime_utils_AssetManifest.parse(data,rootPath);
 	library = lime_utils_AssetLibrary.fromManifest(manifest);
 	lime_utils_Assets.registerLibrary("default",library);
@@ -5371,13 +5432,72 @@ $hxClasses["PlayState"] = PlayState;
 PlayState.__name__ = ["PlayState"];
 PlayState.__super__ = flixel_FlxState;
 PlayState.prototype = $extend(flixel_FlxState.prototype,{
-	create: function() {
+	_player: null
+	,create: function() {
+		this._player = new Player2();
+		Character.addToPlayState(this,this._player);
+		this._player.screenCenter();
 		flixel_FlxState.prototype.create.call(this);
 	}
 	,update: function(elapsed) {
+		this._player.movement();
 		flixel_FlxState.prototype.update.call(this,elapsed);
 	}
 	,__class__: PlayState
+});
+var Player2 = function(X,Y,SimpleGraphic) {
+	if(Y == null) {
+		Y = 0;
+	}
+	if(X == null) {
+		X = 0;
+	}
+	this.player_height = 100;
+	this.player_width = 100;
+	this.player_graphic = "assets/images/GD1_BlobSpriteSheetx100.png";
+	this.spd = 200;
+	Character.call(this);
+	this.setFlxSprite(this.player_graphic,true,this.player_width,this.player_height);
+	this.setSpeed(this.spd);
+};
+$hxClasses["Player2"] = Player2;
+Player2.__name__ = ["Player2"];
+Player2.__super__ = Character;
+Player2.prototype = $extend(Character.prototype,{
+	spd: null
+	,player_graphic: null
+	,player_width: null
+	,player_height: null
+	,setFlxSprite: function(image_string,is_animated,width,height) {
+		if(is_animated == null) {
+			is_animated = false;
+		}
+		Character.prototype.setFlxSprite.call(this,image_string,is_animated,width,height);
+		this.addAnim("front",[0,0,1,1,0,2,1,3],5,true);
+		this.addAnim("back",[4,4,5,5],5,true);
+		this.addAnim("side",[6,6,7,7],5,true);
+		this.playAnim("front");
+	}
+	,movement: function() {
+		if(flixel_FlxG.keys.checkKeyArrayState([38,40,37,39,87,65,83,68],1)) {
+			var _g = flixel_FlxG.keys.firstPressed();
+			switch(_g) {
+			case 37:case 65:
+				this.move(1);
+				break;
+			case 38:case 87:
+				this.move(256);
+				break;
+			case 39:case 68:
+				this.move(16);
+				break;
+			case 40:case 83:
+				this.move(4096);
+				break;
+			}
+		}
+	}
+	,__class__: Player2
 });
 var Reflect = function() { };
 $hxClasses["Reflect"] = Reflect;
