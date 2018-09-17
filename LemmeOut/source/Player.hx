@@ -9,15 +9,18 @@
  class Player extends FlxSprite
  {
     public var speed:Float = 200;
-    public var controlled:Bool = true; //hardcoded for testing
+    public var controlled:Bool = true;
     
     public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset)
     {
         super(X, Y, SimpleGraphic);
-        loadGraphic("assets/images/GD1_BlobSpriteSheetx100.png", true, 100, 100);
-        animation.add("front", [0,0,1,1,0,2,1,3], 5, true);
-        animation.add("back", [4,4,5,5], 5, true);
-        animation.add("side", [6,6,7,7], 5, true);
+        loadGraphic("assets/images/GD1_blobMasterSheet.png", true, 32, 32);
+        animation.add("front", [0,0,1,1,0,0,1,1,0,2,1,3], 7, true);
+        animation.add("back", [4,4,5,5], 7, true);
+        animation.add("side", [6,6,7,7], 7, true);
+        animation.add("front_grey", [8,8,9,9,8,8,9,9,8,10,9,11], 3, true);
+        animation.add("back_grey", [12,12,13,13], 3, true);
+        animation.add("side_grey", [14,14,15,15], 3, true);
         animation.play("front"); //starting position
         drag.x = drag.y = 1600;
 
@@ -37,6 +40,19 @@
         _right = FlxG.keys.anyPressed([RIGHT, D]);
 
         if (controlled){ //controlled
+
+            switch (facing)
+                {
+                    case FlxObject.LEFT, FlxObject.RIGHT:
+                        animation.play("side");
+                    case FlxObject.UP:
+                        animation.play("back");
+                    case FlxObject.DOWN:
+                        animation.play("front");
+                }
+
+            if (FlxG.keys.justPressed.E) {controlled = false;}
+
             //if player press up+down or left+right, dont move
             if (_up && _down)
                 _up = _down = false;
@@ -105,11 +121,26 @@
                     }
                 }
             }
-            else{ //not controlled
-
-                /*NPC/AI movement code or idle blobby*/
-
-            }
         }
+        else
+            { //not controlled
+
+                //switch to control
+                if (FlxG.keys.justPressed.SPACE)
+                {
+                    controlled = true;
+                }
+
+                //not controlled animation
+                switch (facing)
+                    {
+                        case FlxObject.LEFT, FlxObject.RIGHT:
+                            animation.play("side_grey");
+                        case FlxObject.UP:
+                            animation.play("back_grey");
+                        case FlxObject.DOWN:
+                            animation.play("front_grey");
+                    }
+            }
     }
  }
