@@ -48,6 +48,25 @@
 			if (FlxG.keys.justPressed.E) {controlled = false;} //shoot beam
 
 			if (FlxG.keys.anyPressed([UP, DOWN, LEFT, RIGHT, W, A, S, D])){
+				var x:Float = 0, y:Float = 0;
+				if (FlxG.keys.anyPressed([UP, W])){
+					y = Math.max(y--, -1);
+				}
+				if (FlxG.keys.anyPressed([DOWN, S])){
+					y = Math.min(y++, 1);
+				}
+				if (FlxG.keys.anyPressed([LEFT, A])){
+					x = Math.max(x--, -1);
+				}
+				if (FlxG.keys.anyPressed([RIGHT, D])){
+					x = Math.min(x++, 1);
+				}
+				trace("x: " + Std.string(x) + " y: " + Std.string(y));
+				//Diagonal pressing
+				if (x != 0 && y != 0){
+					
+				}
+				
 				switch(FlxG.keys.firstPressed()){
 					case FlxKey.UP, FlxKey.W:
 						move(FlxObject.UP);
