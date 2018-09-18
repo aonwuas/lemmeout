@@ -1,19 +1,125 @@
 package;
-import flixel.FlxSprite;
-import flixel.FlxObject;
-import flixel.system.FlxAssets.FlxGraphicAsset;
 
+import flixel.FlxObject;
+import haxe.Timer;
 /**
  * ...
  * @author Anthony Ben Jerry Rachel Steven
  */
-class NPC extends FlxSprite
+class NPC extends Character
 {
 
-	public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset) 
+	var a_state:AnimationState;
+	var m_state:MoveState;
+	var direction:Int;
+	var delay:Float = 2	;
+	var last_timestamp:Float = 0;
+	var player:Player = null;
+	var default_behavior:MoveState;
+	public function new(?x:Float=0, ?y:Float=0, ?start_behavior:MoveState = MoveState.PATROL) 
 	{
-		super(X, Y, SimpleGraphic);
+		super(x, y);
+		default_behavior = start_behavior;
+		m_state = MoveState.PATROL;
+		direction = FlxObject.DOWN;
 		
 	}
 	
+	public function movement(){
+		switch(m_state){
+			case MoveState.PATROL:
+				patrol();
+			case MoveState.HUNT:
+				hunt();
+			case MoveState.LOOK:
+				look();
+			case MoveState.CHASE:
+				chase(player);
+			case MoveState.POSSESSED:
+				possessed();
+		}
+	}
+	
+	
+	function chase(target:Character){
+		if (player == null){
+			m_state = default_behavior;
+		}
+		else{
+			
+		}
+	}
+	function possessed(){
+		
+	}
+	
+	function look(){
+		if (Timer.stamp() >= last_timestamp + delay){
+			move(direction);
+			switch(direction){
+				case FlxObject.UP:
+					direction = FlxObject.LEFT;
+				case FlxObject.DOWN:
+					direction = FlxObject.RIGHT;
+				case FlxObject.LEFT:
+					direction = FlxObject.UP;
+				case FlxObject.RIGHT:
+					direction = FlxObject.DOWN;
+			/*	case FlxObject.LEFT:
+						flxsprite.facing = FlxObject.UP;
+						flxsprite.animation.play("back");
+						direction = FlxObject.UP;
+				case FlxObject.RIGHT:
+						flxsprite.facing = FlxObject.DOWN;
+						flxsprite.animation.play("front");
+						direction = FlxObject.DOWN;
+				case FlxObject.UP:
+						flxsprite.facing = FlxObject.RIGHT;
+						flxsprite.animation.play("side");
+						direction = FlxObject.RIGHT;
+						flxsprite.setFacingFlip(flxsprite.facing, true, false);
+				case FlxObject.DOWN:
+						flxsprite.facing = FlxObject.LEFT;
+						flxsprite.animation.play("side");
+						direction = FlxObject.LEFT;
+						flxsprite.setFacingFlip(flxsprite.facing, false, false);*/
+			}
+			last_timestamp = Timer.stamp();
+			trace(last_timestamp);
+		}
+		
+	}
+	
+	function hunt(){
+		
+	}
+	
+	function patrol(){
+		move(direction);
+		
+	}
+	/*function possessed(blobby:Player){
+		
+	}*/
+}
+
+@:enum
+abstract MoveState(Int)	{
+	var POSSESSED = -1;
+	var LOOK      =  0;
+	var PATROL       =  1;
+	var HUNT  =  2;
+	var CHASE = 3;
+}
+
+@:enum
+abstract AnimationState(String)	{
+	var FRONT = "front";
+	var BACK = "back";
+	var SIDE = "side";
+	var P_FRONT = "possessed_front";
+	var P_BACK = "possessed_back";
+	var P_SIDE = "possessed_side";
+	var STUNNED = "stunned";
+	var FIRING = "firing";
 }
