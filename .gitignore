@@ -7,6 +7,7 @@ LemmeOut/export
 /export/
 export/
 export/*
+/LemmeOut/export/.build
 tests/unit/src/TestSuite.hx
 dump
 .vscode
