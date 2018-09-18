@@ -17,7 +17,7 @@ class NPC extends Character
 	public function new(?x:Float=0, ?y:Float=0) 
 	{
 		super(x,y);
-		m_state = MoveState.LOOK;
+		m_state = MoveState.PATROL;
 		direction = FlxObject.DOWN;
 		
 	}
