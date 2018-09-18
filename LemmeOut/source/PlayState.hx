@@ -12,24 +12,24 @@ import openfl.Assets;
 import flixel.FlxObject;
 import flixel.util.FlxCollision;
 import flixel.FlxG;
+
+
 class PlayState extends FlxState
 {
-
-var _player:Player;
-public var _bullet:FlxSprite;
-public var walls:FlxObject;
-public var exit:FlxSprite;
+	var _player:Player;
+	public var _bullet:FlxSprite;
+	public var walls:FlxObject;
+	public var exit:FlxSprite;
+	public var _mWalls:FlxTilemap;
 
 	override public function create():Void
 	{
 		var _map:TiledMap;
-		var _mWalls:FlxTilemap;
 		_map = new TiledMap(AssetPaths.test2__tmx);
 		_mWalls = new FlxTilemap();
 		_mWalls.loadMapFromArray(cast(_map.getLayer("floor"), TiledTileLayer).tileArray, _map.width, _map.height, AssetPaths.background__png, _map.tileWidth, _map.tileHeight, FlxTilemapAutoTiling.OFF, 1, 1, 3);
 		_mWalls.follow();
-		_mWalls.setTileProperties(0, FlxObject.ANY);
-		_mWalls.setTileProperties(1, FlxObject.NONE);
+		_mWalls.setTileProperties(1, FlxObject.ANY);
 		_mWalls.setTileProperties(2, FlxObject.NONE);
 		_mWalls.setTileProperties(3, FlxObject.NONE);
 		_mWalls.setTileProperties(4, FlxObject.NONE);
@@ -38,6 +38,7 @@ public var exit:FlxSprite;
 		_mWalls.setTileProperties(7, FlxObject.NONE);
 		_mWalls.setTileProperties(8, FlxObject.NONE);
 		_mWalls.setTileProperties(9, FlxObject.NONE);
+		_mWalls.setTileProperties(10, FlxObject.NONE);
 		add(_mWalls);
 		
 		//setup bullet
@@ -57,6 +58,6 @@ public var exit:FlxSprite;
 		if (FlxCollision.pixelPerfectCheck(_player.flxsprite, _bullet)){ _player.controlled = false; }
 		_player.movement();
 		super.update(elapsed);
-		//FlxG.collide(_player, _mWalls);
+		FlxG.collide(_player.flxsprite, _mWalls);
 	}
 }
