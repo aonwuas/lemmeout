@@ -25,6 +25,8 @@
         super();
 		setFlxSprite(player_graphic, true, player_width, player_height);
 		setSpeed(spd);
+		//setSize(8, 14);
+ 		//offset.set(4, 2);
     }
 	
 	//turn image into FlxSprite
