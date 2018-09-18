@@ -1,6 +1,11 @@
 tests/unit/report/
 tests/unit/.temp/
 tests/unit/bin/
+LemmeOut/export/*
+LemmeOut/export/
+LemmeOut/export
+/export/
+export/
 export/*
 tests/unit/src/TestSuite.hx
 dump

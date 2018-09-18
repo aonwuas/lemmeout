@@ -40,6 +40,7 @@ class Character{
 	public function addAnim(name:String, frames:Array<Int>, fps:Int, looped:Bool = false):Void{
 		flxsprite.animation.add(name, frames, fps, looped);
 	}
+	
 	public function playAnim(name:String):Void{
 		flxsprite.animation.play(name);
 	}
@@ -68,6 +69,25 @@ class Character{
 					flxsprite.animation.play("side");
 					flxsprite.setFacingFlip(flxsprite.facing, false, false);
 					flxsprite.velocity.set(-speed, 0);
+		}
+	}
+	
+	public function turn(direction:Int){
+		switch(direction){
+			case FlxObject.UP:
+					flxsprite.facing = FlxObject.UP;
+					flxsprite.animation.play("back");
+			case FlxObject.DOWN:
+					flxsprite.facing = FlxObject.DOWN;
+					flxsprite.animation.play("front");
+			case FlxObject.RIGHT:
+					flxsprite.facing = FlxObject.RIGHT;
+					flxsprite.animation.play("side");
+					flxsprite.setFacingFlip(flxsprite.facing, true, false);
+			case FlxObject.LEFT:
+					flxsprite.facing = FlxObject.LEFT;
+					flxsprite.animation.play("side");
+					flxsprite.setFacingFlip(flxsprite.facing, false, false);
 		}
 	}
 }

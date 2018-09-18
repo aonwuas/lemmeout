@@ -16,6 +16,9 @@ class JanitorJerry extends NPC
 		super(x,y);
 		setFlxSprite(JanitorJerry.graphic, true, JanitorJerry.width, JanitorJerry.height);
 		setSpeed(JanitorJerry.spd);
+		addAnim("front", [0, 1], 2, true);
+		addAnim("back", [2, 3], 2, true);
+		addAnim("side", [3, 4], 2, true);
 	}
 	
 }
