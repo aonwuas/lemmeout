@@ -4,7 +4,7 @@ package;
  * ...
  * @author Anthony Ben Jerry Rachel Steven
  */
-class JanitorJerry extends Character 
+class JanitorJerry extends NPC 
 {
 	static var graphic:String = "assets/images/GD1_JerrySheet.png";
 	static var width:Int = 32;

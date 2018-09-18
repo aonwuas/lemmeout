@@ -16,6 +16,8 @@ class Character{
 	private var flxsprite:FlxSprite;
 	public var speed:Float;// = 200;
 	
+	
+	
 	public static function addToPlayState(state:FlxState, char:Character){
 		state.add(char.flxsprite);
 	}
@@ -34,11 +36,17 @@ class Character{
 	public function screenCenter():Void{
 		flxsprite.screenCenter();
 	}
+	
 	public function addAnim(name:String, frames:Array<Int>, fps:Int, looped:Bool = false):Void{
 		flxsprite.animation.add(name, frames, fps, looped);
 	}
 	public function playAnim(name:String):Void{
 		flxsprite.animation.play(name);
+	}
+	
+	public function warp(x:Float, y:Float){
+		flxsprite.x = x;
+		flxsprite.y = y;
 	}
 	public function move(direction:Int){
 		switch(direction){

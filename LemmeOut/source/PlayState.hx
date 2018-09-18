@@ -39,6 +39,7 @@ public var playerBullets:FlxTypedGroup<FlxSprite>;
 	override public function update(elapsed:Float):Void
 	{
 		_player.movement();
+		_jerry.movement();
 		super.update(elapsed);
 	}
 }

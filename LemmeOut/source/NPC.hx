@@ -1,5 +1,6 @@
 package;
 
+import flixel.FlxObject;
 /**
  * ...
  * @author Anthony Ben Jerry Rachel Steven
@@ -8,59 +9,60 @@ class NPC extends Character
 {
 
 	var a_state:AnimationState;
-	var p_state:MoveState;
-	public function new() 
+	var m_state:MoveState;
+	var direction:Int;
+	public function new(?x:Float=0, ?y:Float=0) 
 	{
-		super();
+		super(x,y);
+		m_state = MoveState.PATROL;
+		direction = FlxObject.DOWN;
 		
 	}
 	
 	public function movement(){
+		switch(m_state){
+			case MoveState.PATROL:
+				patrol();
+			case MoveState.HUNT:
+				hunt();
+			case MoveState.LOOK:
+				look();
+			case MoveState.CHASE:
+				chase;
+		}
+	}
+	
+	
+	function chase(target:Character){
 		
 		
 	}
 	
-	public 
-	
-	class Behavior{
-		//PATROL, LOOK, HUNT, CHASE, POSSESSED
-		//PATROL follow set path repeatedly
-		//LOOK stand in place and scan left to right
-		//HUNT walk around trying to find blobby
-		//CHASE blobby found, follow it while running
-		//POSSESSED controlled by blobby
+	function look(){
 		
-		function Chase(var target:Character){
-			
-			
-		}
 		
-		function Look(){
-			
-			
-		}
-		
-		var Hunt(){
-			
-		}
-		
-		var Patrol(){
-			
-		}
-		function Possessed(var blobby:Player){
-			
-		}
 	}
 	
+	function hunt(){
+		
+	}
+	
+	function patrol(){
+		move(direction);
+		
+	}
+	/*function possessed(blobby:Player){
+		
+	}*/
 }
 
 @:enum
 abstract MoveState(Int)	{
-	var POSSESSED = -1;
+	//var POSSESSED = -1;
 	var LOOK      =  0;
 	var PATROL       =  1;
 	var HUNT  =  2;
-	var chase = 3;
+	var CHASE = 3;
 }
 
 @:enum
