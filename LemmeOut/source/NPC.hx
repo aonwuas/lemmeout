@@ -14,9 +14,12 @@ class NPC extends Character
 	var direction:Int;
 	var delay:Float = 2	;
 	var last_timestamp:Float = 0;
-	public function new(?x:Float=0, ?y:Float=0) 
+	var player:Player = null;
+	var default_behavior:MoveState;
+	public function new(?x:Float=0, ?y:Float=0, ?start_behavior:MoveState = MoveState.PATROL) 
 	{
-		super(x,y);
+		super(x, y);
+		default_behavior = start_behavior;
 		m_state = MoveState.PATROL;
 		direction = FlxObject.DOWN;
 		
@@ -31,12 +34,22 @@ class NPC extends Character
 			case MoveState.LOOK:
 				look();
 			case MoveState.CHASE:
-				chase;
+				chase(player);
+			case MoveState.POSSESSED:
+				possessed();
 		}
 	}
 	
 	
 	function chase(target:Character){
+		if (player == null){
+			m_state = default_behavior;
+		}
+		else{
+			
+		}
+	}
+	function possessed(){
 		
 	}
 	
@@ -92,7 +105,7 @@ class NPC extends Character
 
 @:enum
 abstract MoveState(Int)	{
-	//var POSSESSED = -1;
+	var POSSESSED = -1;
 	var LOOK      =  0;
 	var PATROL       =  1;
 	var HUNT  =  2;
