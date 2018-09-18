@@ -13,7 +13,7 @@ import flixel.FlxState;
  
 class Character{
 
-	private var flxsprite:FlxSprite;
+	public var flxsprite:FlxSprite;
 	public var speed:Float;// = 200;
 	
 	
