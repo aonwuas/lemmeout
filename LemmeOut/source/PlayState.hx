@@ -4,27 +4,19 @@ import flixel.FlxState;
 import flixel.FlxSprite;
 import flixel.group.FlxGroup;
 import flixel.FlxObject;
+import flixel.util.FlxCollision;
 class PlayState extends FlxState
 {
 
 var _player:Player;
-public var playerBullets:FlxTypedGroup<FlxSprite>;
+public var _bullet:FlxSprite;
 
 	override public function create():Void
 	{
-		//setup bullets
-		var numPlayerBullets:Int = 10;
-		playerBullets = new FlxTypedGroup(numPlayerBullets);
-		var sprite:FlxSprite;
-		for (i in 0...numPlayerBullets) //recycle bullets
-		{
-			//instantiate a new sprite offscreen
-			sprite = new FlxSprite(0,0);
-			sprite.loadGraphic("assets/images/GD1_mindblip.png",false,16,16);
-			sprite.exists = false;
-			playerBullets.add(sprite);
-		}
-		add(playerBullets);
+		//setup bullet
+		_bullet = new FlxSprite(0,0);
+		_bullet.loadGraphic("assets/images/GD1_mindblip.png",false,16,16);
+		add(_bullet);
 
 		//setup player
 		_player = new Player();
@@ -35,6 +27,7 @@ public var playerBullets:FlxTypedGroup<FlxSprite>;
 
 	override public function update(elapsed:Float):Void
 	{
+		if (FlxCollision.pixelPerfectCheck(_player.flxsprite, _bullet)){ _player.controlled = false; }
 		_player.movement();
 		super.update(elapsed);
 	}

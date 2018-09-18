@@ -59,7 +59,7 @@
 		{	
 			//make new bullet
 			var playState:PlayState = cast FlxG.state;
-			var bullet:FlxSprite = playState.playerBullets.recycle();
+			var bullet:FlxSprite = playState._bullet;
 			bullet.reset(flxsprite.x + flxsprite.width/2 - bullet.width/2, flxsprite.y + flxsprite.height/2 - bullet.height/2);
 
 			//determine velocity and rotation of bullet
@@ -91,9 +91,6 @@
                 case FlxObject.LEFT, FlxObject.RIGHT:
                     playAnim("side");
             }
-
-			//lose control
-			if (FlxG.keys.justPressed.E) {controlled = false;}
 
 			//movement logic
 			if (FlxG.keys.justPressed.UP || FlxG.keys.justPressed.W || FlxG.keys.justPressed.DOWN || FlxG.keys.justPressed.S) {
