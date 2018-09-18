@@ -24,6 +24,7 @@ class PlayState extends FlxState
 
 	override public function create():Void
 	{
+		FlxG.mouse.visible = false;
 		var _map:TiledMap;
 		_map = new TiledMap(AssetPaths.test2__tmx);
 		_mWalls = new FlxTilemap();
@@ -44,17 +45,22 @@ class PlayState extends FlxState
 		//setup bullet
 		_bullet = new FlxSprite(0,0);
 		_bullet.loadGraphic("assets/images/GD1_mindblip.png",false,16,16);
-		add(_bullet);
 
 		//setup player
 		_player = new Player();
 		Character.addToPlayState(this, _player);
 		_player.screenCenter();
 
+		_player.flxsprite.setGraphicSize(24,24);
+		_player.flxsprite.updateHitbox();
+		_player.flxsprite.width = 20.0;
+		_player.flxsprite.height = 20.0;
+
 		super.create();
 	}
 	override public function update(elapsed:Float):Void
 	{
+		if (FlxG.keys.justPressed.E){ add(_bullet); }
 		if (FlxCollision.pixelPerfectCheck(_player.flxsprite, _bullet)){ _player.controlled = false; }
 		_player.movement();
 		super.update(elapsed);
