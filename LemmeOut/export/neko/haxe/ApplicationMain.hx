@@ -38,7 +38,11 @@ import haxe.macro.Expr;
 		
 		var config = {
 			
-			build: "19",
+<<<<<<< HEAD
+			build: "21",
+=======
+			build: "29",
+>>>>>>> master
 			company: "HaxeFlixel",
 			file: "LemmeOut",
 			fps: 60,
@@ -110,7 +114,11 @@ import haxe.macro.Expr;
 		#if (lime >= "7.0.0")
 		ManifestResources.init (config);
 		
-		app.meta["build"] = "19";
+<<<<<<< HEAD
+		app.meta["build"] = "21";
+=======
+		app.meta["build"] = "29";
+>>>>>>> master
 		app.meta["company"] = "HaxeFlixel";
 		app.meta["file"] = "LemmeOut";
 		app.meta["name"] = "LemmeOut";
