@@ -5,14 +5,20 @@ import flixel.FlxState;
 import flixel.FlxSprite;
 import flixel.addons.editors.tiled.*;
 import flixel.group.FlxGroup;
+<<<<<<< HEAD
 import flixel.system.debug.interaction.tools.Tool;
 import flixel.tile.FlxTilemap;
 import flixel.tile.FlxBaseTilemap;
 import openfl.Assets;
+=======
+import flixel.FlxObject;
+import flixel.util.FlxCollision;
+>>>>>>> master
 class PlayState extends FlxState
 {
 
 var _player:Player;
+<<<<<<< HEAD
 public var playerBullets:FlxTypedGroup<FlxSprite>;
 public var walls:FlxObject;
 public var exit:FlxSprite;
@@ -55,6 +61,16 @@ public var exit:FlxSprite;
 			playerBullets.add(sprite);
 		}
 		add(playerBullets);
+=======
+public var _bullet:FlxSprite;
+
+	override public function create():Void
+	{
+		//setup bullet
+		_bullet = new FlxSprite(0,0);
+		_bullet.loadGraphic("assets/images/GD1_mindblip.png",false,16,16);
+		add(_bullet);
+>>>>>>> master
 
 		//setup player
 		_player = new Player();
@@ -85,6 +101,7 @@ public var exit:FlxSprite;
 	 
 	override public function update(elapsed:Float):Void
 	{
+		if (FlxCollision.pixelPerfectCheck(_player.flxsprite, _bullet)){ _player.controlled = false; }
 		_player.movement();
 		super.update(elapsed);
 	}

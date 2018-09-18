@@ -8,9 +8,10 @@
 
  class Player extends Character
  {
+	//initial variables
     public var spd:Float = 200;
 	public var controlled:Bool = true;
-	private var player_graphic:String = "assets/images/GD1_blobMasterSheet.png";
+	private var player_graphic:String = "assets/images/GD1_blobMasterSheetStun.png";
     private var player_width:Int = 32;
 	private var player_height:Int = 32;
 
@@ -18,6 +19,7 @@
 	var _justX:Bool = false;
 	var _justY:Bool = false;
     
+	//constructor
     public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset)
     {
         super();
@@ -25,6 +27,7 @@
 		setSpeed(spd);
     }
 	
+	//turn image into FlxSprite
 	override public function setFlxSprite(image_string:String, is_animated:Bool = false, width:Int, height:Int):Void 
 	{
 		super.setFlxSprite(image_string, is_animated, width, height);
@@ -38,8 +41,10 @@
 		flxsprite.facing = FlxObject.DOWN;
 	}
 
-     public function movement():Void
+	//movement logic
+    public function movement():Void
     {
+		//shortcut variables
 		var _up:Bool = false;
         var _down:Bool = false;
         var _left:Bool = false;
@@ -49,13 +54,15 @@
         _left = FlxG.keys.anyPressed([LEFT, A]);
         _right = FlxG.keys.anyPressed([RIGHT, D]);
 
-		if (controlled && FlxG.keys.justPressed.R) //shoot beam
-		{
+		//shoot beam
+		if (controlled && FlxG.keys.justPressed.E)
+		{	
+			//make new bullet
 			var playState:PlayState = cast FlxG.state;
-			var bullet:FlxSprite = playState.playerBullets.recycle();
+			var bullet:FlxSprite = playState._bullet;
 			bullet.reset(flxsprite.x + flxsprite.width/2 - bullet.width/2, flxsprite.y + flxsprite.height/2 - bullet.height/2);
 
-			//determine velocity and rotation of sprite
+			//determine velocity and rotation of bullet
 			switch (flxsprite.facing){
 				case FlxObject.UP:
 					bullet.angle = 0;
@@ -64,7 +71,6 @@
 					bullet.angle = 180;
 					bullet.velocity.y = 400;
 				case FlxObject.RIGHT:
-					bullet.facing = FlxObject.UP;
 					bullet.angle = 90;
 					bullet.velocity.x = 400;
 				case FlxObject.LEFT:
@@ -73,7 +79,8 @@
 			}
 		}
 
-		if (controlled) //controlling blob
+		//controlling player
+		if (controlled)
 		{
 			//turn green when space pressed
 			switch (flxsprite.facing){
@@ -85,10 +92,7 @@
                     playAnim("side");
             }
 
-			//lose control
-			if (FlxG.keys.justPressed.E) {controlled = false;}
-
-			//movement
+			//movement logic
 			if (FlxG.keys.justPressed.UP || FlxG.keys.justPressed.W || FlxG.keys.justPressed.DOWN || FlxG.keys.justPressed.S) {
 				_justY = true;
 				_justX = false;
@@ -107,7 +111,8 @@
 				if (_down) {y--;}
 				if (_right) {x++;}
 				if (_left) {x--;}
-				if (x != 0 && y != 0){ //determine priority
+				//determine priority
+				if (x != 0 && y != 0){
 					if (_justY) { x = 0; }
 					if (_justX) { y = 0; }
 				}
@@ -118,7 +123,7 @@
 				if (x == -1) { move(FlxObject.LEFT); }
 			}
 		}
-		else //not controlling blob
+		else //not controlling player
 		{
             if (FlxG.keys.justPressed.SPACE) {controlled = true;} //regain control
 

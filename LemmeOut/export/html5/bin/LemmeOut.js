@@ -806,9 +806,9 @@ ApplicationMain.create = function(config) {
 	ManifestResources.init(config);
 	var _this = app.meta;
 	if(__map_reserved["build"] != null) {
-		_this.setReserved("build","44");
+		_this.setReserved("build","51");
 	} else {
-		_this.h["build"] = "44";
+		_this.h["build"] = "51";
 	}
 	var _this1 = app.meta;
 	if(__map_reserved["company"] != null) {
@@ -4380,7 +4380,7 @@ ManifestResources.init = function(config) {
 	var data;
 	var manifest;
 	var library;
-	data = "{\"name\":null,\"assets\":\"aoy4:pathy34:assets%2Fdata%2Fdata-goes-here.txty4:sizezy4:typey4:TEXTy2:idR1y7:preloadtgoR0y31:assets%2Fimages%2Fbadsprite.pngR2i3099R3y5:IMAGER5R7R6tgoR0y45:assets%2Fimages%2FGD1_BlobSpriteSheetx100.pngR2i12157R3R8R5R9R6tgoR0y49:assets%2Fimages%2FGD1_BlobSpriteSheet_grey100.pngR2i12056R3R8R5R10R6tgoR0y36:assets%2Fimages%2Fimages-go-here.txtR2zR3R4R5R11R6tgoR0y36:assets%2Fmusic%2Fmusic-goes-here.txtR2zR3R4R5R12R6tgoR0y36:assets%2Fsounds%2Fsounds-go-here.txtR2zR3R4R5R13R6tgoR2i2114R3y5:MUSICR5y26:flixel%2Fsounds%2Fbeep.mp3y9:pathGroupaR15y26:flixel%2Fsounds%2Fbeep.ogghR6tgoR2i39706R3R14R5y28:flixel%2Fsounds%2Fflixel.mp3R16aR18y28:flixel%2Fsounds%2Fflixel.ogghR6tgoR2i5794R3y5:SOUNDR5R17R16aR15R17hgoR2i33629R3R20R5R19R16aR18R19hgoR2i15744R3y4:FONTy9:classNamey35:__ASSET__flixel_fonts_nokiafc22_ttfR5y30:flixel%2Ffonts%2Fnokiafc22.ttfR6tgoR2i29724R3R21R22y36:__ASSET__flixel_fonts_monsterrat_ttfR5y31:flixel%2Ffonts%2Fmonsterrat.ttfR6tgoR0y33:flixel%2Fimages%2Fui%2Fbutton.pngR2i519R3R8R5R27R6tgoR0y36:flixel%2Fimages%2Flogo%2Fdefault.pngR2i3280R3R8R5R28R6tgh\",\"rootPath\":null,\"version\":2,\"libraryArgs\":[],\"libraryType\":null}";
+	data = "{\"name\":null,\"assets\":\"aoy4:pathy34:assets%2Fdata%2Fdata-goes-here.txty4:sizezy4:typey4:TEXTy2:idR1y7:preloadtgoR0y31:assets%2Fimages%2Fbadsprite.pngR2i3099R3y5:IMAGER5R7R6tgoR0y41:assets%2Fimages%2FGD1_blobMasterSheet.pngR2i21862R3R8R5R9R6tgoR0y36:assets%2Fimages%2Fimages-go-here.txtR2zR3R4R5R10R6tgoR0y36:assets%2Fmusic%2Fmusic-goes-here.txtR2zR3R4R5R11R6tgoR0y36:assets%2Fsounds%2Fsounds-go-here.txtR2zR3R4R5R12R6tgoR2i2114R3y5:MUSICR5y26:flixel%2Fsounds%2Fbeep.mp3y9:pathGroupaR14y26:flixel%2Fsounds%2Fbeep.ogghR6tgoR2i39706R3R13R5y28:flixel%2Fsounds%2Fflixel.mp3R15aR17y28:flixel%2Fsounds%2Fflixel.ogghR6tgoR2i5794R3y5:SOUNDR5R16R15aR14R16hgoR2i33629R3R19R5R18R15aR17R18hgoR2i15744R3y4:FONTy9:classNamey35:__ASSET__flixel_fonts_nokiafc22_ttfR5y30:flixel%2Ffonts%2Fnokiafc22.ttfR6tgoR2i29724R3R20R21y36:__ASSET__flixel_fonts_monsterrat_ttfR5y31:flixel%2Ffonts%2Fmonsterrat.ttfR6tgoR0y33:flixel%2Fimages%2Fui%2Fbutton.pngR2i519R3R8R5R26R6tgoR0y36:flixel%2Fimages%2Flogo%2Fdefault.pngR2i3280R3R8R5R27R6tgh\",\"rootPath\":null,\"version\":2,\"libraryArgs\":[],\"libraryType\":null}";
 	manifest = lime_utils_AssetManifest.parse(data,rootPath);
 	library = lime_utils_AssetLibrary.fromManifest(manifest);
 	lime_utils_Assets.registerLibrary("default",library);
@@ -5452,9 +5452,10 @@ var Player2 = function(X,Y,SimpleGraphic) {
 	if(X == null) {
 		X = 0;
 	}
-	this.player_height = 100;
-	this.player_width = 100;
-	this.player_graphic = "assets/images/GD1_BlobSpriteSheetx100.png";
+	this.player_height = 32;
+	this.player_width = 32;
+	this.player_graphic = "assets/images/GD1_blobMasterSheet.png";
+	this.controlled = true;
 	this.spd = 200;
 	Character.call(this);
 	this.setFlxSprite(this.player_graphic,true,this.player_width,this.player_height);
@@ -5465,6 +5466,7 @@ Player2.__name__ = ["Player2"];
 Player2.__super__ = Character;
 Player2.prototype = $extend(Character.prototype,{
 	spd: null
+	,controlled: null
 	,player_graphic: null
 	,player_width: null
 	,player_height: null
@@ -5473,26 +5475,80 @@ Player2.prototype = $extend(Character.prototype,{
 			is_animated = false;
 		}
 		Character.prototype.setFlxSprite.call(this,image_string,is_animated,width,height);
-		this.addAnim("front",[0,0,1,1,0,2,1,3],5,true);
-		this.addAnim("back",[4,4,5,5],5,true);
-		this.addAnim("side",[6,6,7,7],5,true);
+		this.addAnim("front",[0,0,1,1,0,0,1,1,0,2,1,3],7,true);
+		this.addAnim("back",[4,4,5,5],7,true);
+		this.addAnim("side",[6,6,7,7],7,true);
+		this.addAnim("front_grey",[8,8,9,9,8,8,9,9,8,10,9,11],3,true);
+		this.addAnim("back_grey",[12,12,13,13],3,true);
+		this.addAnim("side_grey",[14,14,15,15],3,true);
 		this.playAnim("front");
 	}
 	,movement: function() {
-		if(flixel_FlxG.keys.checkKeyArrayState([38,40,37,39,87,65,83,68],1)) {
-			var _g = flixel_FlxG.keys.firstPressed();
+		if(this.controlled) {
+			var _g = this.flxsprite.facing;
 			switch(_g) {
-			case 37:case 65:
-				this.move(1);
+			case 1:case 16:
+				this.playAnim("side");
 				break;
-			case 38:case 87:
-				this.move(256);
+			case 256:
+				this.playAnim("back");
 				break;
-			case 39:case 68:
-				this.move(16);
+			case 4096:
+				this.playAnim("front");
 				break;
-			case 40:case 83:
-				this.move(4096);
+			}
+			var _this = flixel_FlxG.keys.justPressed;
+			if(_this.keyManager.checkStatus(69,_this.status)) {
+				this.controlled = false;
+			}
+			if(flixel_FlxG.keys.checkKeyArrayState([38,40,37,39,87,65,83,68],1)) {
+				var x = 0;
+				var y = 0;
+				if(flixel_FlxG.keys.checkKeyArrayState([38,87],1)) {
+					y = Math.max(y--,-1);
+				}
+				if(flixel_FlxG.keys.checkKeyArrayState([40,83],1)) {
+					y = Math.min(y++,1);
+				}
+				if(flixel_FlxG.keys.checkKeyArrayState([37,65],1)) {
+					x = Math.max(x--,-1);
+				}
+				if(flixel_FlxG.keys.checkKeyArrayState([39,68],1)) {
+					x = Math.min(x++,1);
+				}
+				haxe_Log.trace("x: " + (x == null ? "null" : "" + x) + " y: " + (y == null ? "null" : "" + y),{ fileName : "Player2.hx", lineNumber : 64, className : "Player2", methodName : "movement"});
+				var tmp = x != 0 && y != 0;
+				var _g1 = flixel_FlxG.keys.firstPressed();
+				switch(_g1) {
+				case 37:case 65:
+					this.move(1);
+					break;
+				case 38:case 87:
+					this.move(256);
+					break;
+				case 39:case 68:
+					this.move(16);
+					break;
+				case 40:case 83:
+					this.move(4096);
+					break;
+				}
+			}
+		} else {
+			var _this1 = flixel_FlxG.keys.justPressed;
+			if(_this1.keyManager.checkStatus(32,_this1.status)) {
+				this.controlled = true;
+			}
+			var _g2 = this.flxsprite.facing;
+			switch(_g2) {
+			case 1:case 16:
+				this.playAnim("side_grey");
+				break;
+			case 256:
+				this.playAnim("back_grey");
+				break;
+			case 4096:
+				this.playAnim("front_grey");
 				break;
 			}
 		}
