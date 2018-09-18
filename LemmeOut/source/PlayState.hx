@@ -8,6 +8,7 @@ class PlayState extends FlxState
 {
 
 var _player:Player;
+var _jerry:JanitorJerry;
 public var playerBullets:FlxTypedGroup<FlxSprite>;
 
 	override public function create():Void
@@ -28,7 +29,9 @@ public var playerBullets:FlxTypedGroup<FlxSprite>;
 
 		//setup player
 		_player = new Player();
+		_jerry = new JanitorJerry(30,30);
 		Character.addToPlayState(this, _player);
+		Character.addToPlayState(this, _jerry);
 		_player.screenCenter();
 		super.create();
 	}

@@ -19,9 +19,9 @@ class Character{
 	public static function addToPlayState(state:FlxState, char:Character){
 		state.add(char.flxsprite);
 	}
-	public function new() {
+	public function new(?x:Float=0, ?y:Float=0) {
 		//Create Character's empty FlxSprite object
-		flxsprite = new FlxSprite(0, 0);
+		flxsprite = new FlxSprite(x, y);
 	}
 	//After creating a new Character object, call setFlxSprite to set image information
 	public function setFlxSprite(image_string:String, is_animated:Bool = false, width:Int, height:Int):Void {
