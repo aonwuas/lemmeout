@@ -11,7 +11,7 @@
 	//initial variables
     public var spd:Float = 200;
 	public var controlled:Bool = true;
-	private var player_graphic:String = "assets/images/GD1_blobMasterSheet.png";
+	private var player_graphic:String = "assets/images/GD1_blobMasterSheetStun.png";
     private var player_width:Int = 32;
 	private var player_height:Int = 32;
 
@@ -55,7 +55,7 @@
         _right = FlxG.keys.anyPressed([RIGHT, D]);
 
 		//shoot beam
-		if (controlled && FlxG.keys.justPressed.R)
+		if (controlled && FlxG.keys.justPressed.E)
 		{	
 			//make new bullet
 			var playState:PlayState = cast FlxG.state;
