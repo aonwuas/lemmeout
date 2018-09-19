@@ -117,24 +117,6 @@ class NPC extends Character
 					direction = FlxObject.UP;
 				case FlxObject.RIGHT:
 					direction = FlxObject.DOWN;
-			/*	case FlxObject.LEFT:
-						flxsprite.facing = FlxObject.UP;
-						flxsprite.animation.play("back");
-						direction = FlxObject.UP;
-				case FlxObject.RIGHT:
-						flxsprite.facing = FlxObject.DOWN;
-						flxsprite.animation.play("front");
-						direction = FlxObject.DOWN;
-				case FlxObject.UP:
-						flxsprite.facing = FlxObject.RIGHT;
-						flxsprite.animation.play("side");
-						direction = FlxObject.RIGHT;
-						flxsprite.setFacingFlip(flxsprite.facing, true, false);
-				case FlxObject.DOWN:
-						flxsprite.facing = FlxObject.LEFT;
-						flxsprite.animat qion.play("side");
-						direction = FlxObject.LEFT;
-						flxsprite.setFacingFlip(flxsprite.facing, false, false);*/
 			}
 			last_timestamp = Timer.stamp();
 			trace(last_timestamp);
