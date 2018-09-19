@@ -59,6 +59,14 @@ class NPC extends Character
 	
 	public function getPossessed(){
 		m_state = MoveState.POSSESSED;
+		switch(direction){
+			case FlxObject.UP:
+				flxsprite.animation.play(AnimationState.P_BACK);
+			case FlxObject.DOWN:
+				flxsprite.animation.play(AnimationState.P_FRONT);
+			case FlxObject.LEFT, FlxObject.RIGHT:
+				flxsprite.animation.play(AnimationState.P_SIDE);
+		}
 		
 	}
 	
@@ -73,7 +81,7 @@ class NPC extends Character
         _down = FlxG.keys.anyPressed([DOWN, S]);
         _left = FlxG.keys.anyPressed([LEFT, A]);
         _right = FlxG.keys.anyPressed([RIGHT, D]);
-
+		FlxG.collide(flxsprite, walls);
 		//movement logic
 			if (FlxG.keys.justPressed.UP || FlxG.keys.justPressed.W || FlxG.keys.justPressed.DOWN || FlxG.keys.justPressed.S) {
 				_justY = true;
