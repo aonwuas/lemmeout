@@ -12,7 +12,7 @@ class TestSwitch extends Switch
 		solid = false;
 		unflipped_sprite = "assets/images/Tiles/ButtonTile.png";
 		flipped_sprite = "assets/images/Tiles/PressedButtonTile.png";
-		loadGraphic(unflipped_sprite, false, 32, 32);
+		loadGraphic(unflipped_sprite, false, 64, 64);
 	}
 
 	override public function action():Void

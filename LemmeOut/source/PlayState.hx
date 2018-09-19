@@ -72,6 +72,8 @@ class PlayState extends FlxState
 		_player.flxsprite.height = 20.0;
 		_player.flxsprite.offset.set(4,8);
 
+		FlxG.worldBounds.set(0,0,900,900);
+
 		super.create();
 	}
 
@@ -92,10 +94,14 @@ class PlayState extends FlxState
 					doors_group.add(new TestDoor(name, x, y));
 				case "TestSwitch":
 					var subject_name:String = object.properties.get("Subject");
-					switches_group.add(new TestSwitch(subject_name, x, y));
+					var _switch:Switch = new TestSwitch(subject_name, x, y);
+					switches_group.add(_switch);
+					trace("name: " + object.name + " x: " + object.x + ", y : " + object.y + ", height: " + object.height + ", width: " + object.width);
+					trace("sprite: x: " + _switch.x + ", y: " + _switch.y + ", height: " + _switch.height + ", width: " + _switch.width);
 			}
 		}
 	}
+
 	public function setSwitches():Void
 	{
 		for(_switch in switches_group.members)
@@ -112,13 +118,13 @@ class PlayState extends FlxState
 			}
 		}
 	}
-
+/*
 	public function triggerSwitch(sprite1:FlxSprite, _switch:Switch)
 	{
 		trace("Triggered switch for " + _switch.getSubjectName());
 		_switch.action();
 	}
-
+*/
 	override public function update(elapsed:Float):Void
 	{
 		if (FlxG.keys.justPressed.E){ add(_bullet); }
@@ -133,9 +139,9 @@ class PlayState extends FlxState
 		super.update(elapsed);
 		FlxG.collide(_player.flxsprite, _mWalls);
 		FlxG.collide(_player.flxsprite, doors_group);
-		for(_switch in switches_group.members)
-		{
-			FlxG.overlap(_player.flxsprite, _switch, triggerSwitch);
+		for(_switch in switches_group.members){
+			if(FlxG.pixelPerfectOverlap(_player.flxsprite, _switch)) _switch.action();
 		}
+		//trace(FlxG.overlap(_player.flxsprite, switches_group, triggerSwitch) + ", hitbox offset: " + _player.flxsprite.offset);
 	}
 }
