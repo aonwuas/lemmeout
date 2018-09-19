@@ -48,8 +48,8 @@ class PlayState extends FlxState
 		_bullet.loadGraphic("assets/images/GD1_mindblip.png",false,16,16);
 
 		//setup player
-		_player = new Player(_mWalls);
-		_jerry = new JanitorJerry(_mWalls, 0, 100);
+		_player = new Player(_mWalls, 200,150);
+		_jerry = new JanitorJerry(_mWalls, 0, 100, _player);
 		Character.addToPlayState(this, _jerry);
 		Character.addToPlayState(this, _player);
 		_player.screenCenter();

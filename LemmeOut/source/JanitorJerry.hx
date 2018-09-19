@@ -12,9 +12,9 @@ class JanitorJerry extends NPC
 	static var height:Int = 32;
 	static var spd:Float = 200;
 	
-	public function new(colliders:FlxTilemap, ?x:Float=0, ?y:Float=0) 
+	public function new(colliders:FlxTilemap, ?x:Float=0, ?y:Float=0, ?player:Player=null) 
 	{
-		super(colliders, x,y);
+		super(colliders, x,y, player);
 		setFlxSprite(JanitorJerry.graphic, true, JanitorJerry.width, JanitorJerry.height);
 		setSpeed(JanitorJerry.spd);
 		//addAnim("front", [0, 1], 2, true);

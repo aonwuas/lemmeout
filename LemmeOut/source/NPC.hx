@@ -1,11 +1,13 @@
 package;
 
 import flixel.FlxObject;
+import flixel.math.FlxVector;
 import haxe.Timer;
 import flixel.tile.FlxTilemap;
 import Character.AnimationState;
 import Character.MoveState;
 import flixel.FlxG;
+import flixel.math.FlxPoint;
 /**
  * ...
  * @author Anthony Ben Jerry Rachel Steven
@@ -18,21 +20,26 @@ class NPC extends Character
 	var direction:Int;
 	var delay:Float = 2	;
 	var last_timestamp:Float = 0;
-	var player:Player = null;
+	var player:Player;
 	var default_behavior:MoveState;
 	var _justX:Bool = false;
 	var _justY:Bool = false;
+	var sees_player:Bool = false;
+	var last_seen:Int = null;
+	var start_pos:FlxPoint;
+	var relative:FlxVector;
 		
-	public function new(colliders:FlxTilemap, ?x:Float=0, ?y:Float=0, ?start_behavior:MoveState = MoveState.PATROL) 
+	public function new(colliders:FlxTilemap, ?x:Float=0, ?y:Float=0, ?start_behavior:MoveState = MoveState.PATROL, ?target:Player=null) 
 	{
 		super(colliders, x, y);
 		default_behavior = start_behavior;
 		m_state = MoveState.PATROL;
 		direction = FlxObject.DOWN;
-		
+		player = target;
 	}
 	
 	public function movement(){
+		checkVision();
 		switch(m_state){
 			case MoveState.PATROL:
 				patrol();
@@ -41,22 +48,71 @@ class NPC extends Character
 			case MoveState.LOOK:
 				look();
 			case MoveState.CHASE:
-				chase(player);
+				chase(last_seen);
 			case MoveState.POSSESSED:
 				possessed();
 		}
 	}
 	
-	
-	function chase(target:Character){
+	function checkVision():Void{
+		sees_player = false;
 		if (player == null){
-			m_state = default_behavior;
-		}
-		else{
-			
-		}
+			 return;
+		 }
+		 if (walls.ray(flxsprite.getMidpoint(), player.flxsprite.getMidpoint()))
+		 {
+			 relative = (player.flxsprite.getMidpoint().toVector().subtractNew(flxsprite.getMidpoint().toVector()));
+			 if (Math.abs(relative.x) > Math.abs(relative.y)){//Along X axis
+				if (relative.x >= 0){ //To the right
+					if (direction != FlxObject.LEFT){
+						sees_player = true;
+						warp(flxsprite.x, weird_round(flxsprite.y, 32));
+						last_seen = FlxObject.RIGHT;
+					}
+				}
+				else{ //To the left
+					if (direction != FlxObject.RIGHT){
+						sees_player = true;
+						warp(flxsprite.x, weird_round(flxsprite.y, 32));
+						last_seen = FlxObject.LEFT;
+					}
+				}
+			 }
+			 else{//Along y axis
+				if (relative.y <= 0){ //Above
+					if (direction != FlxObject.DOWN){
+						sees_player = true;
+						warp(weird_round(flxsprite.x, 32), flxsprite.y);
+						last_seen = FlxObject.UP;
+					}
+				}
+				else{ //Below
+					if (direction != FlxObject.UP){
+						sees_player = true;
+						warp(weird_round(flxsprite.x, 32), flxsprite.y);
+						last_seen = FlxObject.DOWN;
+					}
+				} 
+			 }
+		 }
+		 if (sees_player){
+			m_state = MoveState.CHASE;
+		 }
+		 else{
+			 m_state = default_behavior;
+		 }
+	 }
+	
+	
+	function chase(thisway:Int){
+		trace(weird_round(flxsprite.x, 32));
+		move(thisway);
 	}
 	
+	function weird_round(num:Float, base:Float):Float{
+		var row:Int = Math.floor(num / base);
+		return (base * row);
+	}
 	public function getPossessed(){
 		m_state = MoveState.POSSESSED;
 		switch(direction){
