@@ -21,6 +21,8 @@ class PlayState extends FlxState
 	public var walls:FlxObject;
 	public var exit:FlxSprite;
 	public var _mWalls:FlxTilemap;
+	public var doors_group:FlxTypedGroup<Door>;
+	public var switches_group:FlxTypedGroup<Switch>;
 
 	override public function create():Void
 	{
@@ -41,6 +43,17 @@ class PlayState extends FlxState
 		_mWalls.setTileProperties(9, FlxObject.NONE);
 		_mWalls.setTileProperties(10, FlxObject.NONE);
 		add(_mWalls);
+
+		//create doors and obstacles
+		doors_group = new FlxTypedGroup<Door>();
+		add(doors_group);
+		switches_group = new FlxTypedGroup<Switch>();
+		add(switches_group);
+
+		var tmp_map:TiledObjectLayer = cast _map.getLayer("obstacles");
+		placeObjects(tmp_map.objects);
+		setSwitches();
+		
 		
 		//setup bullet
 		_bullet = new FlxSprite(0,0);
@@ -58,6 +71,50 @@ class PlayState extends FlxState
 
 		super.create();
 	}
+
+	//function to place all interactable objects in the level
+	public function placeObjects(objects:Array<TiledObject>):Void
+	{
+		for(object in objects)
+		{
+			var type:String = object.type;
+			var data:Xml = object.xmlData.x;
+
+			var x:Int = Std.parseInt(data.get("x"));
+			var y:Int = Std.parseInt(data.get("y"));
+			switch(type)
+			{
+				case "TestDoor":
+					var name:String = object.name;
+					doors_group.add(new TestDoor(name, x, y));
+				case "TestSwitch":
+					var subject_name:String = object.properties.get("Subject");
+					switches_group.add(new TestSwitch(subject_name, x, y));
+			}
+		}
+	}
+	public function setSwitches():Void
+	{
+		for(_switch in switches_group.members)
+		{
+			var target_name:String = _switch.getSubjectName();
+			var target:Door;
+			for(door in doors_group)
+			{
+				if(door.getName() == target_name)
+				{
+					_switch.setSubject(door);
+					break;
+				}
+			}
+		}
+	}
+
+	public function triggerSwitch(sprite1:FlxSprite, _switch:Switch)
+	{
+		_switch.action();
+	}
+
 	override public function update(elapsed:Float):Void
 	{
 		if (FlxG.keys.justPressed.E){ add(_bullet); }
@@ -65,5 +122,10 @@ class PlayState extends FlxState
 		_player.movement();
 		super.update(elapsed);
 		FlxG.collide(_player.flxsprite, _mWalls);
+		FlxG.collide(_player.flxsprite, doors_group);
+		for(_switch in switches_group.members)
+		{
+			FlxG.overlap(_player.flxsprite, _switch, triggerSwitch);
+		}
 	}
 }
