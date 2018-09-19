@@ -90,56 +90,21 @@ null
 #if !display
 #if flash
 
-<<<<<<< HEAD
 @:keep @:bind #if display private #end class __ASSET__assets_data_data_goes_here_txt extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_data_level1_tmx extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_data_level1_floor_csv extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_data_level1_walls_csv extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_data_levels_background_tsx extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_data_levels_floorandwalltiles_tsx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels_level1_tmx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels_walltilesheet_tsx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_test_tmx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_test2_tmx extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_data_testobjects_tsx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_testtiles_tsx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_images_background_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_blobmastersheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_mindblip_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-=======
-@:keep @:bind #if display private #end class __ASSET__assets_music_music_goes_here_txt extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_stevesheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_bensheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_gd1_blobmastersheetstun_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_gd1_jerrysheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_gd1_mindblip_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_floortile_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_buttontile_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_electricaldoor_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_untitled_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_computer_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_wall_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_buttondoor_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_gd1colorstest_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_door_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_depressedrpibuttontile_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_pressedbuttontile_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_rpibuttontile_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_block_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_electricalswitch_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_electricalswitch_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_depressedrpibuttontile_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_pressedbuttontile_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_rpibuttontile_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_door_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_wall_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_buttondoor_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_computer_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_electricaldoor_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_floortile_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_buttontile_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_tonysheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_gd1_rachelsheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_bensheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
->>>>>>> master
+@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_stevesheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_tonysheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_images_go_here_txt extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_images_tiles_block_xcf extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_images_tiles_buttondoor_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
