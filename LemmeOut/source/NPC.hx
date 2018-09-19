@@ -73,7 +73,7 @@ class NPC extends Character
         _down = FlxG.keys.anyPressed([DOWN, S]);
         _left = FlxG.keys.anyPressed([LEFT, A]);
         _right = FlxG.keys.anyPressed([RIGHT, D]);
-
+		FlxG.collide(flxsprite, walls);
 		//movement logic
 			if (FlxG.keys.justPressed.UP || FlxG.keys.justPressed.W || FlxG.keys.justPressed.DOWN || FlxG.keys.justPressed.S) {
 				_justY = true;

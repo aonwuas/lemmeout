@@ -87,7 +87,7 @@ class Character{
 					flxsprite.velocity.set(speed, 0);
 			case FlxObject.LEFT:
 					flxsprite.facing = FlxObject.LEFT;
-					if (state == MoveState.POSSESSED){
+					if (state != MoveState.POSSESSED){
 						flxsprite.animation.play(AnimationState.SIDE);
 					}
 					else{
