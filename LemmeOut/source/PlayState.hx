@@ -15,6 +15,7 @@ import flixel.FlxG;
 
 class PlayState extends FlxState
 {
+	
 	var _player:Player;
 	var _jerry:JanitorJerry;
 	public var _bullet:FlxSprite;
