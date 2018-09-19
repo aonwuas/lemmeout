@@ -132,9 +132,6 @@ class NPC extends Character
 		move(direction);
 		
 	}
-	/*function possessed(blobby:Player){
-		
-	}*/
 }
 
 @:enum
