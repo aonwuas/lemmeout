@@ -55,7 +55,6 @@ class PlayState extends FlxState
 		placeObjects(tmp_map.objects);
 		setSwitches();
 		
-		
 		//setup bullet
 		_bullet = new FlxSprite(0,0);
 		_bullet.loadGraphic("assets/images/GD1_mindblip.png",false,16,16);
@@ -116,6 +115,7 @@ class PlayState extends FlxState
 
 	public function triggerSwitch(sprite1:FlxSprite, _switch:Switch)
 	{
+		trace("Triggered switch for " + _switch.getSubjectName());
 		_switch.action();
 	}
 
