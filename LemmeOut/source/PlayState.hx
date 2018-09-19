@@ -72,6 +72,12 @@ class PlayState extends FlxState
 		_player.flxsprite.height = 20.0;
 		_player.flxsprite.offset.set(4,8);
 
+		_jerry.flxsprite.setGraphicSize(24,24);
+		_jerry.flxsprite.updateHitbox();
+		_jerry.flxsprite.width = 20.0;
+		_jerry.flxsprite.height = 20.0;
+		_jerry.flxsprite.offset.set(4,8);
+
 		super.create();
 	}
 
@@ -123,13 +129,21 @@ class PlayState extends FlxState
 		//testing purposes: END GAME
 		if (_player.end_game){ FlxG.switchState(new EndState()); }
 
+		//shoot bullet
 		if (FlxG.keys.justPressed.E){ add(_bullet); }
-		if (FlxCollision.pixelPerfectCheck(_jerry.flxsprite, _bullet)){
+		if (FlxCollision.pixelPerfectCheck(_jerry.flxsprite, _bullet)){ //bullet hits jerry
 			_player.controlled = false;
 			_jerry.getPossessed();
 			_bullet.reset(0, 0);
 			_bullet.kill();
 		}
+
+		//jerry touches blob: reset level
+		if (FlxCollision.pixelPerfectCheck(_jerry.flxsprite, _player.flxsprite)){
+			FlxG.switchState(new PlayState());
+		}
+
+		//update
 		_player.movement();
 		_jerry.movement();
 		super.update(elapsed);
