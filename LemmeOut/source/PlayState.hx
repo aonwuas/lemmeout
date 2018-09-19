@@ -13,7 +13,6 @@ import flixel.FlxObject;
 import flixel.util.FlxCollision;
 import flixel.FlxG;
 
-
 class PlayState extends FlxState
 {
 	var _player:Player;
