@@ -55,28 +55,48 @@ class Character{
 		flxsprite.y = y;
 	}
 	
-	public function move(direction:Int){
-		FlxG.collide(flxsprite, walls);
+	public function move(direction:Int, ?state:MoveState = null):Bool{
 		switch(direction){
 			case FlxObject.UP:
 					flxsprite.facing = FlxObject.UP;
-					flxsprite.animation.play("back");
+					if (state != MoveState.POSSESSED){
+						flxsprite.animation.play(AnimationState.BACK);
+					}
+					else{
+						flxsprite.animation.play(AnimationState.P_BACK);
+					}
 					flxsprite.velocity.set(0, -speed);
 			case FlxObject.DOWN:
 					flxsprite.facing = FlxObject.DOWN;
-					flxsprite.animation.play("front");
+					if (state != MoveState.POSSESSED){
+						flxsprite.animation.play(AnimationState.FRONT);
+					}
+					else{
+						flxsprite.animation.play(AnimationState.P_FRONT);
+					}
 					flxsprite.velocity.set(0, speed);
 			case FlxObject.RIGHT:
 					flxsprite.facing = FlxObject.RIGHT;
-					flxsprite.animation.play("side");
+					if (state != MoveState.POSSESSED){
+						flxsprite.animation.play(AnimationState.SIDE);
+					}
+					else{
+						flxsprite.animation.play(AnimationState.P_SIDE);
+					}
 					flxsprite.setFacingFlip(flxsprite.facing, true, false);
 					flxsprite.velocity.set(speed, 0);
 			case FlxObject.LEFT:
 					flxsprite.facing = FlxObject.LEFT;
-					flxsprite.animation.play("side");
+					if (state == MoveState.POSSESSED){
+						flxsprite.animation.play(AnimationState.SIDE);
+					}
+					else{
+						flxsprite.animation.play(AnimationState.P_SIDE);
+					}
 					flxsprite.setFacingFlip(flxsprite.facing, false, false);
 					flxsprite.velocity.set(-speed, 0);
 		}
+		return FlxG.collide(flxsprite, walls);
 	}
 	
 	public function turn(direction:Int){
@@ -97,4 +117,25 @@ class Character{
 					flxsprite.setFacingFlip(flxsprite.facing, false, false);
 		}
 	}
+}
+
+@:enum
+abstract MoveState(Int)	{
+	var POSSESSED = -1;
+	var LOOK      =  0;
+	var PATROL       =  1;
+	var HUNT  =  2;
+	var CHASE = 3;
+}
+
+@:enum
+abstract AnimationState(String)	to String{
+	var FRONT = "front";
+	var BACK = "back";
+	var SIDE = "side";
+	var P_FRONT = "possessed_front";
+	var P_BACK = "possessed_back";
+	var P_SIDE = "possessed_side";
+	var STUNNED = "stunned";
+	var FIRING = "firing";
 }

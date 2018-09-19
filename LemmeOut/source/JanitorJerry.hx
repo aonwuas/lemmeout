@@ -1,5 +1,6 @@
 package;
 import flixel.tile.FlxTilemap;
+import Character.AnimationState;
 /**
  * ...
  * @author Anthony Ben Jerry Rachel Steven
@@ -17,9 +18,12 @@ class JanitorJerry extends NPC
 		setFlxSprite(JanitorJerry.graphic, true, JanitorJerry.width, JanitorJerry.height);
 		setSpeed(JanitorJerry.spd);
 		//addAnim("front", [0, 1], 2, true);
-		addAnim("front", [2, 3], 2, true);
-		addAnim("back", [4, 5], 2, true);
-		addAnim("side", [6, 7], 2, true);
+		addAnim(AnimationState.FRONT, [2, 3], 4, true);
+		addAnim(AnimationState.BACK, [4, 5], 4, true);
+		addAnim(AnimationState.SIDE, [6, 7], 4, true);
+		addAnim(AnimationState.P_FRONT, [2, 3], 4, true);
+		addAnim(AnimationState.P_BACK, [4, 5], 4, true);
+		addAnim(AnimationState.P_SIDE, [6, 7], 4, true);
 	}
 	
 	override public function getPossessed() 

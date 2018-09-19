@@ -3,6 +3,8 @@ package;
 import flixel.FlxObject;
 import haxe.Timer;
 import flixel.tile.FlxTilemap;
+import Character.AnimationState;
+import Character.MoveState;
 /**
  * ...
  * @author Anthony Ben Jerry Rachel Steven
@@ -56,6 +58,11 @@ class NPC extends Character
 		
 	}
 	
+	public function release(){
+		m_state = default_behavior;
+		
+	}
+	
 	function possessed(){
 		
 	}
@@ -102,7 +109,18 @@ class NPC extends Character
 	}
 	
 	function patrol(){
-		move(direction);
+		if (move(direction)){
+			switch(direction){
+				case FlxObject.UP:
+					direction = FlxObject.DOWN;
+				case FlxObject.DOWN:
+					direction = FlxObject.UP;
+				case FlxObject.LEFT:
+					direction = FlxObject.RIGHT;
+				case FlxObject.RIGHT:
+					direction = FlxObject.LEFT;
+			}
+		}
 		
 	}
 	/*function possessed(blobby:Player){
@@ -110,23 +128,5 @@ class NPC extends Character
 	}*/
 }
 
-@:enum
-abstract MoveState(Int)	{
-	var POSSESSED = -1;
-	var LOOK      =  0;
-	var PATROL       =  1;
-	var HUNT  =  2;
-	var CHASE = 3;
-}
 
-@:enum
-abstract AnimationState(String)	{
-	var FRONT = "front";
-	var BACK = "back";
-	var SIDE = "side";
-	var P_FRONT = "possessed_front";
-	var P_BACK = "possessed_back";
-	var P_SIDE = "possessed_side";
-	var STUNNED = "stunned";
-	var FIRING = "firing";
-}
+
