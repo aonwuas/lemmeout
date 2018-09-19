@@ -3,6 +3,8 @@ package;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.tile.FlxTilemap;
+import flixel.FlxG;
 //import flixel.system.FlxAssets.FlxGraphicAsset;
 
 /**
@@ -15,15 +17,17 @@ class Character{
 
 	public var flxsprite:FlxSprite;
 	public var speed:Float;// = 200;
+	private var walls:FlxTilemap;
 	
 	
 	
 	public static function addToPlayState(state:FlxState, char:Character){
 		state.add(char.flxsprite);
 	}
-	public function new(?x:Float=0, ?y:Float=0) {
+	public function new(colliders:FlxTilemap, ?x:Float=0, ?y:Float=0) {
 		//Create Character's empty FlxSprite object
 		flxsprite = new FlxSprite(x, y);
+		walls = colliders;
 	}
 	//After creating a new Character object, call setFlxSprite to set image information
 	public function setFlxSprite(image_string:String, is_animated:Bool = false, width:Int, height:Int):Void {
@@ -49,6 +53,7 @@ class Character{
 		flxsprite.x = x;
 		flxsprite.y = y;
 	}
+	
 	public function move(direction:Int){
 		switch(direction){
 			case FlxObject.UP:
