@@ -68,6 +68,7 @@ class PlayState extends FlxState
 		if (FlxCollision.pixelPerfectCheck(_jerry.flxsprite, _bullet)){
 			_player.controlled = false;
 			_jerry.getPossessed();
+			_bullet.reset(0, 0);
 			_bullet.kill();
 		}
 		_player.movement();
