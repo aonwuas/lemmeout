@@ -21,9 +21,9 @@ class JanitorJerry extends NPC
 		addAnim(AnimationState.FRONT, [2, 3], 4, true);
 		addAnim(AnimationState.BACK, [4, 5], 4, true);
 		addAnim(AnimationState.SIDE, [6, 7], 4, true);
-		addAnim(AnimationState.P_FRONT, [2, 3], 4, true);
-		addAnim(AnimationState.P_BACK, [4, 5], 4, true);
-		addAnim(AnimationState.P_SIDE, [6, 7], 4, true);
+		addAnim(AnimationState.P_FRONT, [8, 9], 4, true);
+		addAnim(AnimationState.P_BACK, [10, 11], 4, true);
+		addAnim(AnimationState.P_SIDE, [12, 13], 4, true);
 	}
 	
 	override public function getPossessed() 
