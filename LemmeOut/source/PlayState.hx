@@ -58,17 +58,20 @@ class PlayState extends FlxState
 		_player.flxsprite.updateHitbox();
 		_player.flxsprite.width = 20.0;
 		_player.flxsprite.height = 20.0;
+		_player.flxsprite.offset.set(4,8);
 
 		super.create();
 	}
 	override public function update(elapsed:Float):Void
 	{
 		if (FlxG.keys.justPressed.E){ add(_bullet); }
-		if (FlxCollision.pixelPerfectCheck(_player.flxsprite, _bullet)){ _player.controlled = false; }
+		if (FlxCollision.pixelPerfectCheck(_jerry.flxsprite, _bullet)){
+			_player.controlled = false;
+			_jerry.getPossessed();
+			_bullet.kill();
+		}
 		_player.movement();
 		_jerry.movement();
 		super.update(elapsed);
-		//FlxG.collide(_player.flxsprite, _mWalls);
-		//FlxG.collide(_jerry.flxsprite, _mWalls);
 	}
 }
