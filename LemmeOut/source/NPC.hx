@@ -2,6 +2,7 @@ package;
 
 import flixel.FlxObject;
 import haxe.Timer;
+import flixel.tile.FlxTilemap;
 /**
  * ...
  * @author Anthony Ben Jerry Rachel Steven
@@ -16,9 +17,9 @@ class NPC extends Character
 	var last_timestamp:Float = 0;
 	var player:Player = null;
 	var default_behavior:MoveState;
-	public function new(?x:Float=0, ?y:Float=0, ?start_behavior:MoveState = MoveState.PATROL) 
+	public function new(colliders:FlxTilemap, ?x:Float=0, ?y:Float=0, ?start_behavior:MoveState = MoveState.PATROL) 
 	{
-		super(x, y);
+		super(colliders, x, y);
 		default_behavior = start_behavior;
 		m_state = MoveState.PATROL;
 		direction = FlxObject.DOWN;
@@ -49,6 +50,12 @@ class NPC extends Character
 			
 		}
 	}
+	
+	public function getPosessed(){
+		m_state = MoveState.POSSESSED;
+		
+	}
+	
 	function possessed(){
 		
 	}
@@ -80,7 +87,7 @@ class NPC extends Character
 						flxsprite.setFacingFlip(flxsprite.facing, true, false);
 				case FlxObject.DOWN:
 						flxsprite.facing = FlxObject.LEFT;
-						flxsprite.animation.play("side");
+						flxsprite.animat qion.play("side");
 						direction = FlxObject.LEFT;
 						flxsprite.setFacingFlip(flxsprite.facing, false, false);*/
 			}

@@ -1,5 +1,5 @@
 package;
-
+import flixel.tile.FlxTilemap;
 /**
  * ...
  * @author Anthony Ben Jerry Rachel Steven
@@ -11,9 +11,9 @@ class JanitorJerry extends NPC
 	static var height:Int = 32;
 	static var spd:Float = 200;
 	
-	public function new(?x:Float=0, ?y:Float=0) 
+	public function new(colliders:FlxTilemap, ?x:Float=0, ?y:Float=0) 
 	{
-		super(x,y);
+		super(colliders, x,y);
 		setFlxSprite(JanitorJerry.graphic, true, JanitorJerry.width, JanitorJerry.height);
 		setSpeed(JanitorJerry.spd);
 		addAnim("front", [0, 1], 2, true);
