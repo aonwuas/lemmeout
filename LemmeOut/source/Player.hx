@@ -5,6 +5,7 @@
  import flixel.input.keyboard.FlxKey;
  import flixel.FlxObject;
  import flixel.FlxSprite;
+ import flixel.tile.FlxTilemap;
 
  class Player extends Character
  {
@@ -20,9 +21,9 @@
 	var _justY:Bool = false;
     
 	//constructor
-    public function new(?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset)
+    public function new(colliders:FlxTilemap, ?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset)
     {
-        super();
+        super(colliders);
 		setFlxSprite(player_graphic, true, player_width, player_height);
 		setSpeed(spd);
     }
@@ -44,6 +45,8 @@
 	//movement logic
     public function movement():Void
     {
+		FlxG.collide(flxsprite, walls);
+		
 		//shortcut variables
 		var _up:Bool = false;
         var _down:Bool = false;
