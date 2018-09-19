@@ -46,6 +46,7 @@
     public function movement():Void
     {
 		FlxG.collide(flxsprite, walls);
+		
 		//shortcut variables
 		var _up:Bool = false;
         var _down:Bool = false;

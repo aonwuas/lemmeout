@@ -64,7 +64,7 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		if (FlxG.keys.justPressed.E){ add(_bullet); }
-		if (FlxCollision.pixelPerfectCheck(_player.flxsprite, _bullet)){ _player.controlled = false; }
+		if (FlxCollision.pixelPerfectCheck(_jerry.flxsprite, _bullet)){ _player.controlled = false; _jerry.getPossessed(); }
 		_player.movement();
 		_jerry.movement();
 		super.update(elapsed);
