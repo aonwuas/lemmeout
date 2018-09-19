@@ -13,10 +13,11 @@ import flixel.FlxObject;
 import flixel.util.FlxCollision;
 import flixel.FlxG;
 
-
 class PlayState extends FlxState
 {
+	
 	var _player:Player;
+	var _jerry:JanitorJerry;
 	public var _bullet:FlxSprite;
 	public var walls:FlxObject;
 	public var exit:FlxSprite;
@@ -60,7 +61,9 @@ class PlayState extends FlxState
 		_bullet.loadGraphic("assets/images/GD1_mindblip.png",false,16,16);
 
 		//setup player
-		_player = new Player();
+		_player = new Player(_mWalls);
+		_jerry = new JanitorJerry(_mWalls, 0, 100);
+		Character.addToPlayState(this, _jerry);
 		Character.addToPlayState(this, _player);
 		_player.screenCenter();
 
@@ -68,6 +71,7 @@ class PlayState extends FlxState
 		_player.flxsprite.updateHitbox();
 		_player.flxsprite.width = 20.0;
 		_player.flxsprite.height = 20.0;
+		_player.flxsprite.offset.set(4,8);
 
 		super.create();
 	}
@@ -118,8 +122,14 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		if (FlxG.keys.justPressed.E){ add(_bullet); }
-		if (FlxCollision.pixelPerfectCheck(_player.flxsprite, _bullet)){ _player.controlled = false; }
+		if (FlxCollision.pixelPerfectCheck(_jerry.flxsprite, _bullet)){
+			_player.controlled = false;
+			_jerry.getPossessed();
+			_bullet.reset(0, 0);
+			_bullet.kill();
+		}
 		_player.movement();
+		_jerry.movement();
 		super.update(elapsed);
 		FlxG.collide(_player.flxsprite, _mWalls);
 		FlxG.collide(_player.flxsprite, doors_group);
