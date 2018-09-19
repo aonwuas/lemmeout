@@ -28,6 +28,7 @@ class Character{
 		//Create Character's empty FlxSprite object
 		flxsprite = new FlxSprite(x, y);
 		walls = colliders;
+		FlxG.collide(flxsprite, walls);
 	}
 	//After creating a new Character object, call setFlxSprite to set image information
 	public function setFlxSprite(image_string:String, is_animated:Bool = false, width:Int, height:Int):Void {
@@ -55,6 +56,7 @@ class Character{
 	}
 	
 	public function move(direction:Int){
+		FlxG.collide(flxsprite, walls);
 		switch(direction){
 			case FlxObject.UP:
 					flxsprite.facing = FlxObject.UP;

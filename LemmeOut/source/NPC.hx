@@ -51,7 +51,7 @@ class NPC extends Character
 		}
 	}
 	
-	public function getPosessed(){
+	public function getPossessed(){
 		m_state = MoveState.POSSESSED;
 		
 	}
