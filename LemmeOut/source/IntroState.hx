@@ -24,6 +24,6 @@ class IntroState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
         if (_comic.animation.frameIndex == 6) { FlxG.switchState(new PlayState()); }
-		super.update(elapsed);
+		else super.update(elapsed);
 	}
 }

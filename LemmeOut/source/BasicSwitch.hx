@@ -4,7 +4,7 @@ import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
 
-class TestSwitch extends Switch
+class BasicSwitch extends Switch
 {	
 	public function new(_sub:String, ?x:Float = 0, ?y:Float = 0)
 	{
@@ -27,16 +27,5 @@ class TestSwitch extends Switch
 				flipped = true;
 			}
 	}
-	
-	override public function unaction():Void{
-		if (flipped)
-		{
-			if (subject.isOpen())
-			{
-				subject.changeState();
-			}
-			loadGraphic(unflipped_sprite, false, 64, 64);
-			flipped = false;
-		}
-	}
+
 }

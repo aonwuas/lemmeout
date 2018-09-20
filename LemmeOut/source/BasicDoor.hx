@@ -4,7 +4,7 @@ import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
 
-class TestDoor extends Door{
+class BasicDoor extends Door{
 
 	public function new(_name:String, ?x:Float = 0, ?y:Float = 0)
 	{

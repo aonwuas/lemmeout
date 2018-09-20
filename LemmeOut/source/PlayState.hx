@@ -27,11 +27,16 @@ class PlayState extends FlxState
 	public var doors_group:FlxTypedGroup<Door>;
 	public var switches_group:FlxTypedGroup<Switch>;
 	public var _map:TiledMap;
+	public var characters:Array<Character>;
+	public var NPCS:Array<NPC>;
+
+	public var times_run:Int = 0;
 
 	override public function create():Void
 	{
+		trace("Times create has been run: " + (times_run += 1));
 		FlxG.mouse.visible = false;
-		_map = new TiledMap(AssetPaths.test2__tmx);
+		_map = new TiledMap(AssetPaths.test__tmx);
 		_mWalls = new FlxTilemap();
 		_mWalls.loadMapFromArray(cast(_map.getLayer("floor"), TiledTileLayer).tileArray, _map.width, _map.height, AssetPaths.background__png, _map.tileWidth, _map.tileHeight, FlxTilemapAutoTiling.OFF, 1, 1, 3);
 		_mWalls.follow();
@@ -52,31 +57,13 @@ class PlayState extends FlxState
 		add(doors_group);
 		switches_group = new FlxTypedGroup<Switch>();
 		add(switches_group);
+		characters = new Array<Character>();
+		NPCS = new Array<NPC>();
 
 		var tmp_map:TiledObjectLayer = cast _map.getLayer("obstacles");
-		placeObjects(tmp_map.objects);
+		//trace("Number of objects: " + tmp_map.objects.length);
+		placeObjects(tmp_map.objects, _mWalls);
 		setSwitches();
-
-		//setup player
-		_player = new Player(_mWalls);
-		Character.addToPlayState(this, _player);
-		FlxG.camera.follow(_player.flxsprite, TOPDOWN, 1);
-		_player.flxsprite.setPosition(368, 1580);
-		_player.flxsprite.setGraphicSize(24,24);
-		_player.flxsprite.updateHitbox();
-		_player.flxsprite.width = 20.0;
-		_player.flxsprite.height = 20.0;
-		_player.flxsprite.offset.set(4,8);
-
-		//setup jerry
-		_jerry = new JanitorJerry(_mWalls, 0, 100);
-		Character.addToPlayState(this, _jerry);
-		_jerry.flxsprite.setPosition(300, 1580); //testing purposes
-		_jerry.flxsprite.setGraphicSize(24,24);
-		_jerry.flxsprite.updateHitbox();
-		_jerry.flxsprite.width = 20.0;
-		_jerry.flxsprite.height = 20.0;
-		_jerry.flxsprite.offset.set(4,8);
 
 		//setup bullet
 		_bullet = new FlxSprite(0,0);
@@ -85,31 +72,35 @@ class PlayState extends FlxState
 		//setup taser
 		_taser = new FlxSprite(0,0);
 		_taser.loadGraphic("assets/images/GD1_taser.png",false,16,16);
-
-		super.create();
 	}
 
 	//function to place all interactable objects in the level
-	public function placeObjects(objects:Array<TiledObject>):Void
+	public function placeObjects(objects:Array<TiledObject>, mWalls:FlxTilemap):Void
 	{
+		var count:Int = 0;
 		for(object in objects)
 		{
+			//trace("Count: " + (count += 1));
 			var type:String = object.type;
 			var data:Xml = object.xmlData.x;
 
-			var x:Int = Std.parseInt(data.get("x"));
-			var y:Int = Std.parseInt(data.get("y"));
+			var x:Float = Std.parseFloat(data.get("x"));
+			var y:Float = Std.parseFloat(data.get("y"));
 			switch(type)
 			{
-				case "TestDoor":
+				case "BasicDoor":
 					var name:String = object.name;
-					doors_group.add(new TestDoor(name, x, y));
-				case "TestSwitch":
+					doors_group.add(new BasicDoor(name, x, y));
+					//trace("Added Door at position (" + x + ", " + y +")");
+				case "BasicSwitch":
 					var subject_name:String = object.properties.get("Subject");
-					var _switch:Switch = new TestSwitch(subject_name, x, y);
+					var _switch:Switch = new BasicSwitch(subject_name, x, y);
 					switches_group.add(_switch);
-					//trace("name: " + object.name + " x: " + object.x + ", y : " + object.y + ", height: " + object.height + ", width: " + object.width);
-					//trace("sprite: x: " + _switch.x + ", y: " + _switch.y + ", height: " + _switch.height + ", width: " + _switch.width);
+					//trace("Added Switch at position (" + x + ", " + y +")");
+				case "Spawn":
+					var character:String = object.properties.get("Character");
+					//trace("Added Character at position (" + x + ", " + y +")");
+					spawnCharacter(character, x, y, mWalls);
 			}
 		}
 	}
@@ -130,13 +121,36 @@ class PlayState extends FlxState
 			}
 		}
 	}
-/*
-	public function triggerSwitch(sprite1:FlxSprite, _switch:Switch)
+
+	public function spawnCharacter(character:String, x:Float, y:Float, mWalls:FlxTilemap)
 	{
-		trace("Triggered switch for " + _switch.getSubjectName());
-		_switch.action();
+		switch(character)
+		{
+			case "Bobby":
+				_player = new Player(mWalls, x, y);
+				Character.addToPlayState(this, _player);
+				characters.push(_player);
+				//FlxG.camera.follow(_player.flxsprite, TOPDOWN, 1);
+				_player.flxsprite.setGraphicSize(24,24);
+				_player.flxsprite.updateHitbox();
+				_player.flxsprite.width = 20.0;
+				_player.flxsprite.height = 20.0;
+				_player.flxsprite.offset.set(4,8);
+				//trace("Added Bobby at position (" + x + ", " + y +")");
+			case "Jerry":
+				_jerry = new JanitorJerry(mWalls, x, y);
+				Character.addToPlayState(this, _jerry);
+				characters.push(_jerry);
+				NPCS.push(_jerry);
+				_jerry.flxsprite.setGraphicSize(24,24);
+				_jerry.flxsprite.updateHitbox();
+				_jerry.flxsprite.width = 20.0;
+				_jerry.flxsprite.height = 20.0;
+				_jerry.flxsprite.offset.set(4,8);
+				//trace("Added Jerry at position (" + x + ", " + y +")");
+		}
 	}
-*/
+
 	override public function update(elapsed:Float):Void
 	{
 		//testing purposes: END GAME
@@ -144,36 +158,46 @@ class PlayState extends FlxState
 
 		//shoot bullet
 		if (_player.controlled && FlxG.keys.justPressed.E){ add(_bullet); }
-		if (FlxCollision.pixelPerfectCheck(_jerry.flxsprite, _bullet)){ //bullet hits jerry
-			_player.controlled = false;
-			_jerry.getPossessed();
-			_bullet.reset(0, 0);
-			_bullet.kill();
+		
+		for(_npc in NPCS)
+		{
+			if (FlxCollision.pixelPerfectCheck(_npc.flxsprite, _bullet))
+				{ //bullet hits jerry
+					_player.controlled = false;
+					_npc.getPossessed();
+					_bullet.reset(0, 0);
+					_bullet.kill();
+				}
 		}
+
 
 		//shoot taser
 		if (_jerry.m_state == MoveState.POSSESSED && FlxG.keys.justPressed.E) {add(_taser); }
+		if (FlxG.collide(_taser, _mWalls) || FlxG.collide(_taser, doors_group)){ //taser collision
+			_taser.reset(0, 0);
+			_taser.kill();
+		}
 
 		//jerry or taser touches blob: reset level
 		if (FlxCollision.pixelPerfectCheck(_jerry.flxsprite, _player.flxsprite) || FlxCollision.pixelPerfectCheck(_player.flxsprite, _taser)){
 			FlxG.switchState(new PlayState());
 		}
-
+		
 		//update
-		_player.movement();
-		_jerry.movement();
+		for(_char in characters) _char.movement();
 		super.update(elapsed);
 		FlxG.collide(_player.flxsprite, _mWalls);
 		FlxG.collide(_player.flxsprite, doors_group);
-		for(_switch in switches_group.members){
-			if (FlxG.pixelPerfectOverlap(_player.flxsprite, _switch))
-			{
-				_switch.action();
-			}
-			else{
-				_switch.unaction();
+		for(_char in characters){
+			for(_switch in switches_group.members){
+				if (FlxG.pixelPerfectOverlap(_char.flxsprite, _switch))
+				{
+					_switch.action();
+				}
+				else{
+					_switch.unaction();
+				}
 			}
 		}
-		//trace(FlxG.overlap(_player.flxsprite, switches_group, triggerSwitch) + ", hitbox offset: " + _player.flxsprite.offset);
 	}
 }

@@ -99,6 +99,11 @@ class Character{
 		return FlxG.collide(flxsprite, walls);
 	}
 	
+	public function movement():Void
+	{
+		//Blank function to be overriden in subclasses
+	}
+
 	public function turn(direction:Int){
 		switch(direction){
 			case FlxObject.UP:
