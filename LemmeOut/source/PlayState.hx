@@ -151,7 +151,7 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		//testing purposes: END GAME
-		//if (_player.end_game){ FlxG.switchState(new EndState()); }
+		if (_player.end_game){ FlxG.switchState(new EndState()); }
 
 		//shoot bullet
 		if (_player.controlled && FlxG.keys.justPressed.E){ add(_bullet); }
@@ -164,6 +164,10 @@ class PlayState extends FlxState
 
 		//shoot taser
 		if (_jerry.m_state == MoveState.POSSESSED && FlxG.keys.justPressed.E) {add(_taser); }
+		if (FlxG.collide(_taser, _mWalls) || FlxG.collide(_taser, doors_group)){ //taser collision
+			_taser.reset(0, 0);
+			_taser.kill();
+		}
 
 		//jerry or taser touches blob: reset level
 		if (FlxCollision.pixelPerfectCheck(_jerry.flxsprite, _player.flxsprite) || FlxCollision.pixelPerfectCheck(_player.flxsprite, _taser)){
