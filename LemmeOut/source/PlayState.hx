@@ -52,7 +52,7 @@ class PlayState extends FlxState
 		add(switches_group);
 
 		var tmp_map:TiledObjectLayer = cast _map.getLayer("obstacles");
-		placeObjects(tmp_map.objects);
+		placeObjects(tmp_map.objects, _mWalls);
 		setSwitches();
 		
 		//setup bullet
@@ -60,6 +60,8 @@ class PlayState extends FlxState
 		_bullet.loadGraphic("assets/images/GD1_mindblip.png",false,16,16);
 
 		//setup player
+		//Should now be done by spawnCharacter()
+		/*
 		_player = new Player(_mWalls);
 		_jerry = new JanitorJerry(_mWalls, 0, 100);
 		Character.addToPlayState(this, _jerry);
@@ -77,20 +79,20 @@ class PlayState extends FlxState
 		_jerry.flxsprite.width = 20.0;
 		_jerry.flxsprite.height = 20.0;
 		_jerry.flxsprite.offset.set(4,8);
-
+		*/
 		super.create();
 	}
 
 	//function to place all interactable objects in the level
-	public function placeObjects(objects:Array<TiledObject>):Void
+	public function placeObjects(objects:Array<TiledObject>, mWalls:FlxTilemap):Void
 	{
 		for(object in objects)
 		{
 			var type:String = object.type;
 			var data:Xml = object.xmlData.x;
 
-			var x:Int = Std.parseInt(data.get("x"));
-			var y:Int = Std.parseInt(data.get("y"));
+			var x:Float = Std.parseFloat(data.get("x"));
+			var y:Float = Std.parseFloat(data.get("y"));
 			switch(type)
 			{
 				case "BasicDoor":
@@ -100,6 +102,9 @@ class PlayState extends FlxState
 					var subject_name:String = object.properties.get("Subject");
 					var _switch:Switch = new BasicSwitch(subject_name, x, y);
 					switches_group.add(_switch);
+				case "Spawn":
+					var character:String = object.properties.get("Character");
+					spawnCharacter(character, x, y, mWalls);
 			}
 		}
 	}
@@ -120,17 +125,35 @@ class PlayState extends FlxState
 			}
 		}
 	}
-/*
-	public function triggerSwitch(sprite1:FlxSprite, _switch:Switch)
+
+	public function spawnCharacter(character:String, x:Float, y:Float, mWalls:FlxTilemap)
 	{
-		trace("Triggered switch for " + _switch.getSubjectName());
-		_switch.action();
+		switch(character)
+		{
+			case "Bobby":
+				_player = new Player(mWalls, x, y);
+				Character.addToPlayState(this, _player);
+				_player.screenCenter();
+				_player.flxsprite.setGraphicSize(24,24);
+				_player.flxsprite.updateHitbox();
+				_player.flxsprite.width = 20.0;
+				_player.flxsprite.height = 20.0;
+				_player.flxsprite.offset.set(4,8);
+			case "Jerry":
+				_jerry = new JanitorJerry(mWalls, x, y);
+				Character.addToPlayState(this, _jerry);
+				_jerry.flxsprite.setGraphicSize(24,24);
+				_jerry.flxsprite.updateHitbox();
+				_jerry.flxsprite.width = 20.0;
+				_jerry.flxsprite.height = 20.0;
+				_jerry.flxsprite.offset.set(4,8);
+		}
 	}
-*/
+
 	override public function update(elapsed:Float):Void
 	{
 		//testing purposes: END GAME
-		if (_player.end_game){ FlxG.switchState(new EndState()); }
+		//if (_player.end_game){ FlxG.switchState(new EndState()); }
 
 		//shoot bullet
 		if (FlxG.keys.justPressed.E){ add(_bullet); }
