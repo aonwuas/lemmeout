@@ -29,7 +29,7 @@ class PlayState extends FlxState
 	{
 		FlxG.mouse.visible = false;
 		var _map:TiledMap;
-		_map = new TiledMap(AssetPaths.test2__tmx);
+		_map = new TiledMap(AssetPaths.test__tmx);
 		_mWalls = new FlxTilemap();
 		_mWalls.loadMapFromArray(cast(_map.getLayer("floor"), TiledTileLayer).tileArray, _map.width, _map.height, AssetPaths.background__png, _map.tileWidth, _map.tileHeight, FlxTilemapAutoTiling.OFF, 1, 1, 3);
 		_mWalls.follow();
@@ -93,15 +93,13 @@ class PlayState extends FlxState
 			var y:Int = Std.parseInt(data.get("y"));
 			switch(type)
 			{
-				case "TestDoor":
+				case "BasicDoor":
 					var name:String = object.name;
-					doors_group.add(new TestDoor(name, x, y));
-				case "TestSwitch":
+					doors_group.add(new BasicDoor(name, x, y));
+				case "BasicSwitch":
 					var subject_name:String = object.properties.get("Subject");
-					var _switch:Switch = new TestSwitch(subject_name, x, y);
+					var _switch:Switch = new BasicSwitch(subject_name, x, y);
 					switches_group.add(_switch);
-					trace("name: " + object.name + " x: " + object.x + ", y : " + object.y + ", height: " + object.height + ", width: " + object.width);
-					trace("sprite: x: " + _switch.x + ", y: " + _switch.y + ", height: " + _switch.height + ", width: " + _switch.width);
 			}
 		}
 	}
@@ -157,6 +155,5 @@ class PlayState extends FlxState
 		for(_switch in switches_group.members){
 			if(FlxG.pixelPerfectOverlap(_player.flxsprite, _switch)) _switch.action();
 		}
-		//trace(FlxG.overlap(_player.flxsprite, switches_group, triggerSwitch) + ", hitbox offset: " + _player.flxsprite.offset);
 	}
 }

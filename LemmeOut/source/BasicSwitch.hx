@@ -4,7 +4,7 @@ import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
 
-class TestSwitch extends Switch
+class BasicSwitch extends Switch
 {	
 	public function new(_sub:String, ?x:Float = 0, ?y:Float = 0)
 	{
