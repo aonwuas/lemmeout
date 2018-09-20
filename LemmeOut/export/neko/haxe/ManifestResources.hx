@@ -90,51 +90,52 @@ null
 #if !display
 #if flash
 
-@:keep @:bind #if display private #end class __ASSET__assets_music_music_goes_here_txt extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_stevesheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_blobmastersheetstun_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_jerrysheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_mindblip_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_background_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_taser_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_floortile_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_buttontile_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_electricaldoor_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_untitled_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_computer_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_wall_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_buttondoor_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_gd1colorstest_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_door_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_depressedrpibuttontile_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_pressedbuttontile_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_rpibuttontile_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_block_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_electricalswitch_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_electricalswitch_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_depressedrpibuttontile_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_pressedbuttontile_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_rpibuttontile_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_door_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_wall_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_buttondoor_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_computer_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_electricaldoor_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_floortile_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_buttontile_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_jerrysheet_walks_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_tonysheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_rachelsheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_bensheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
-@:keep @:bind #if display private #end class __ASSET__assets_images_images_go_here_txt extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_sounds_sounds_go_here_txt extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_data_background_tsx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_data_goes_here_txt extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_data_test_tmx extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_data_testtiles_tsx extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_data_testobjects_tsx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels_level1_tmx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels_walltilesheet_tsx extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_data_test_tmx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_test2_tmx extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_data_testobjects_tsx extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_data_testtiles_tsx extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_images_background_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_bensheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_blobmastersheetstun_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_jerrysheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_jerrysheet_walks_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_mindblip_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_rachelsheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_stevesheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_taser_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_tonysheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_images_go_here_txt extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_block_xcf extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_buttondoor_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_buttondoor_xcf extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_buttontile_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_buttontile_xcf extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_computer_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_computer_xcf extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_depressedrpibuttontile_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_depressedrpibuttontile_xcf extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_door_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_door_xcf extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_electricaldoor_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_electricaldoor_xcf extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_electricalswitch_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_electricalswitch_xcf extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_floortile_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_floortile_xcf extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_gd1colorstest_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_pressedbuttontile_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_pressedbuttontile_xcf extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_rpibuttontile_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_rpibuttontile_xcf extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_untitled_xcf extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_wall_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_wall_xcf extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_music_music_goes_here_txt extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_sounds_sounds_go_here_txt extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_beep_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_flixel_ogg extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_fonts_nokiafc22_ttf extends null { }
@@ -146,12 +147,12 @@ null
 
 #elseif (desktop || cpp)
 
-@:keep @:file("/usr/local/lib/haxe/lib/flixel/4,5,0/assets/sounds/beep.ogg") #if display private #end class __ASSET__flixel_sounds_beep_ogg extends haxe.io.Bytes {}
-@:keep @:file("/usr/local/lib/haxe/lib/flixel/4,5,0/assets/sounds/flixel.ogg") #if display private #end class __ASSET__flixel_sounds_flixel_ogg extends haxe.io.Bytes {}
-@:keep @:font("/usr/local/lib/haxe/lib/flixel/4,5,0/assets/fonts/nokiafc22.ttf") #if display private #end class __ASSET__flixel_fonts_nokiafc22_ttf extends lime.text.Font {}
-@:keep @:font("/usr/local/lib/haxe/lib/flixel/4,5,0/assets/fonts/monsterrat.ttf") #if display private #end class __ASSET__flixel_fonts_monsterrat_ttf extends lime.text.Font {}
-@:keep @:image("/usr/local/lib/haxe/lib/flixel/4,5,0/assets/images/ui/button.png") #if display private #end class __ASSET__flixel_images_ui_button_png extends lime.graphics.Image {}
-@:keep @:image("/usr/local/lib/haxe/lib/flixel/4,5,0/assets/images/logo/default.png") #if display private #end class __ASSET__flixel_images_logo_default_png extends lime.graphics.Image {}
+@:keep @:file("C:/HaxeToolkit/haxe/lib/flixel/4,5,0/assets/sounds/beep.ogg") #if display private #end class __ASSET__flixel_sounds_beep_ogg extends haxe.io.Bytes {}
+@:keep @:file("C:/HaxeToolkit/haxe/lib/flixel/4,5,0/assets/sounds/flixel.ogg") #if display private #end class __ASSET__flixel_sounds_flixel_ogg extends haxe.io.Bytes {}
+@:keep @:font("C:/HaxeToolkit/haxe/lib/flixel/4,5,0/assets/fonts/nokiafc22.ttf") #if display private #end class __ASSET__flixel_fonts_nokiafc22_ttf extends lime.text.Font {}
+@:keep @:font("C:/HaxeToolkit/haxe/lib/flixel/4,5,0/assets/fonts/monsterrat.ttf") #if display private #end class __ASSET__flixel_fonts_monsterrat_ttf extends lime.text.Font {}
+@:keep @:image("C:/HaxeToolkit/haxe/lib/flixel/4,5,0/assets/images/ui/button.png") #if display private #end class __ASSET__flixel_images_ui_button_png extends lime.graphics.Image {}
+@:keep @:image("C:/HaxeToolkit/haxe/lib/flixel/4,5,0/assets/images/logo/default.png") #if display private #end class __ASSET__flixel_images_logo_default_png extends lime.graphics.Image {}
 
 
 

@@ -14,7 +14,7 @@ class IntroState extends FlxState
 
         _comic = new FlxSprite(0,0);
         _comic.loadGraphic("assets/images/background.png",true,32,32);
-        _comic.animation.add("comic", [0,1,2,3,4,5,6,7,8,9], 10, true);
+        _comic.animation.add("comic", [0,1,2,3,4,5,6,7,8,9], 255, true);
         _comic.animation.play("comic");
         _comic.screenCenter();
         add(_comic);

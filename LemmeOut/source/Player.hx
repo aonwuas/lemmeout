@@ -9,8 +9,8 @@
 
  class Player extends Character
  {
-	 //testing purposes: END GAME
-	 public var end_game:Bool = false;
+	//testing purposes: END GAME
+	public var end_game:Bool = false;
 
 	//initial variables
     public var spd:Float = 200;
@@ -46,7 +46,7 @@
 	}
 
 	//movement logic
-    public function movement():Void
+    override public function movement():Void
     {
 
 		//testing purposes: END GAME

@@ -33,7 +33,7 @@ class NPC extends Character
 		
 	}
 	
-	public function movement(){
+	override public function movement(){
 		switch(m_state){
 			case MoveState.PATROL:
 				patrol();

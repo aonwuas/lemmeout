@@ -27,12 +27,15 @@ class PlayState extends FlxState
 	public var doors_group:FlxTypedGroup<Door>;
 	public var switches_group:FlxTypedGroup<Switch>;
 	public var _map:TiledMap;
-	public var characters:Array<Character>
+	public var characters:Array<Character>;
+
+	public var times_run:Int = 0;
 
 	override public function create():Void
 	{
+		trace("Times create has been run: " + (times_run += 1));
 		FlxG.mouse.visible = false;
-		_map = new TiledMap(AssetPaths.test2__tmx);
+		_map = new TiledMap(AssetPaths.test__tmx);
 		_mWalls = new FlxTilemap();
 		_mWalls.loadMapFromArray(cast(_map.getLayer("floor"), TiledTileLayer).tileArray, _map.width, _map.height, AssetPaths.background__png, _map.tileWidth, _map.tileHeight, FlxTilemapAutoTiling.OFF, 1, 1, 3);
 		_mWalls.follow();
@@ -56,32 +59,9 @@ class PlayState extends FlxState
 		characters = new Array<Character>();
 
 		var tmp_map:TiledObjectLayer = cast _map.getLayer("obstacles");
+		//trace("Number of objects: " + tmp_map.objects.length);
 		placeObjects(tmp_map.objects, _mWalls);
 		setSwitches();
-
-		//setup player
-		//Should now be done by spawnCharacter()
-		/*
-		_player = new Player(_mWalls);
-		Character.addToPlayState(this, _player);
-		FlxG.camera.follow(_player.flxsprite, TOPDOWN, 1);
-		_player.flxsprite.setPosition(368, 1580);
-		_player.flxsprite.setGraphicSize(24,24);
-		_player.flxsprite.updateHitbox();
-		_player.flxsprite.width = 20.0;
-		_player.flxsprite.height = 20.0;
-		_player.flxsprite.offset.set(4,8);
-
-		//setup jerry
-		_jerry = new JanitorJerry(_mWalls, 0, 100);
-		Character.addToPlayState(this, _jerry);
-		_jerry.flxsprite.setPosition(300, 1580); //testing purposes
-		_jerry.flxsprite.setGraphicSize(24,24);
-		_jerry.flxsprite.updateHitbox();
-		_jerry.flxsprite.width = 20.0;
-		_jerry.flxsprite.height = 20.0;
-		_jerry.flxsprite.offset.set(4,8);
-		*/
 
 		//setup bullet
 		_bullet = new FlxSprite(0,0);
@@ -90,15 +70,15 @@ class PlayState extends FlxState
 		//setup taser
 		_taser = new FlxSprite(0,0);
 		_taser.loadGraphic("assets/images/GD1_taser.png",false,16,16);
-
-		super.create();
 	}
 
 	//function to place all interactable objects in the level
 	public function placeObjects(objects:Array<TiledObject>, mWalls:FlxTilemap):Void
 	{
+		var count:Int = 0;
 		for(object in objects)
 		{
+			//trace("Count: " + (count += 1));
 			var type:String = object.type;
 			var data:Xml = object.xmlData.x;
 
@@ -109,12 +89,15 @@ class PlayState extends FlxState
 				case "BasicDoor":
 					var name:String = object.name;
 					doors_group.add(new BasicDoor(name, x, y));
+					//trace("Added Door at position (" + x + ", " + y +")");
 				case "BasicSwitch":
 					var subject_name:String = object.properties.get("Subject");
 					var _switch:Switch = new BasicSwitch(subject_name, x, y);
 					switches_group.add(_switch);
+					//trace("Added Switch at position (" + x + ", " + y +")");
 				case "Spawn":
 					var character:String = object.properties.get("Character");
+					//trace("Added Character at position (" + x + ", " + y +")");
 					spawnCharacter(character, x, y, mWalls);
 			}
 		}
@@ -144,20 +127,24 @@ class PlayState extends FlxState
 			case "Bobby":
 				_player = new Player(mWalls, x, y);
 				Character.addToPlayState(this, _player);
-				_player.screenCenter();
+				characters.push(_player);
+				FlxG.camera.follow(_player.flxsprite, TOPDOWN, 1);
 				_player.flxsprite.setGraphicSize(24,24);
 				_player.flxsprite.updateHitbox();
 				_player.flxsprite.width = 20.0;
 				_player.flxsprite.height = 20.0;
 				_player.flxsprite.offset.set(4,8);
+				//trace("Added Bobby at position (" + x + ", " + y +")");
 			case "Jerry":
 				_jerry = new JanitorJerry(mWalls, x, y);
 				Character.addToPlayState(this, _jerry);
+				characters.push(_jerry);
 				_jerry.flxsprite.setGraphicSize(24,24);
 				_jerry.flxsprite.updateHitbox();
 				_jerry.flxsprite.width = 20.0;
 				_jerry.flxsprite.height = 20.0;
 				_jerry.flxsprite.offset.set(4,8);
+				//trace("Added Jerry at position (" + x + ", " + y +")");
 		}
 	}
 
@@ -184,8 +171,7 @@ class PlayState extends FlxState
 		}
 
 		//update
-		_player.movement();
-		_jerry.movement();
+		for(_char in characters) _char.movement();
 		super.update(elapsed);
 		FlxG.collide(_player.flxsprite, _mWalls);
 		FlxG.collide(_player.flxsprite, doors_group);

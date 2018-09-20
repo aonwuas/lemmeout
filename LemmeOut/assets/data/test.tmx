@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="32" tileheight="32" infinite="0" nextobjectid="25">
  <tileset firstgid="1" source="background.tsx"/>
- <layer name="Tile Layer 1" width="25" height="25">
+ <layer name="floor" width="25" height="25">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -33,7 +33,7 @@
  <objectgroup name="obstacles">
   <object id="1" name="Spawn Bobby" type="Spawn" x="352" y="352" width="32" height="32">
    <properties>
-    <property name="Spawn" value="Bobby"/>
+    <property name="Character" value="Bobby"/>
    </properties>
   </object>
   <object id="6" name="Basic Switch 1" type="BasicSwitch" x="192" y="352" width="32" height="32">
@@ -81,17 +81,17 @@
   </object>
   <object id="22" name="Spawn Jerry 1" type="Spawn" x="288" y="352" width="32" height="32">
    <properties>
-    <property name="Spawn" value="Jerry"/>
+    <property name="Character" value="Jerry"/>
    </properties>
   </object>
   <object id="23" name="Spawn Jerry 2" type="Spawn" x="512" y="352" width="32" height="32">
    <properties>
-    <property name="Spawn" value="Jerry"/>
+    <property name="Character" value="Jerry"/>
    </properties>
   </object>
   <object id="24" name="Spawn Jerry 3" type="Spawn" x="96" y="352" width="32" height="32">
    <properties>
-    <property name="Spawn" value="Jerry"/>
+    <property name="Character" value="Jerry"/>
    </properties>
   </object>
  </objectgroup>
