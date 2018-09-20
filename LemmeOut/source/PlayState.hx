@@ -12,6 +12,7 @@ import openfl.Assets;
 import flixel.FlxObject;
 import flixel.util.FlxCollision;
 import flixel.FlxG;
+import Character.MoveState;
 
 class PlayState extends FlxState
 {
@@ -19,6 +20,7 @@ class PlayState extends FlxState
 	var _player:Player;
 	var _jerry:JanitorJerry;
 	public var _bullet:FlxSprite;
+	public var _taser:FlxSprite;
 	public var walls:FlxObject;
 	public var exit:FlxSprite;
 	public var _mWalls:FlxTilemap;
@@ -54,31 +56,35 @@ class PlayState extends FlxState
 		var tmp_map:TiledObjectLayer = cast _map.getLayer("obstacles");
 		placeObjects(tmp_map.objects);
 		setSwitches();
-		
-		//setup bullet
-		_bullet = new FlxSprite(0,0);
-		_bullet.loadGraphic("assets/images/GD1_mindblip.png",false,16,16);
 
 		//setup player
 		_player = new Player(_mWalls);
-		_jerry = new JanitorJerry(_mWalls, 0, 100);
-		Character.addToPlayState(this, _jerry);
 		Character.addToPlayState(this, _player);
-		_player.screenCenter();
 		FlxG.camera.follow(_player.flxsprite, TOPDOWN, 1);
 		_player.flxsprite.setPosition(368, 1580);
-
 		_player.flxsprite.setGraphicSize(24,24);
 		_player.flxsprite.updateHitbox();
 		_player.flxsprite.width = 20.0;
 		_player.flxsprite.height = 20.0;
 		_player.flxsprite.offset.set(4,8);
 
+		//setup jerry
+		_jerry = new JanitorJerry(_mWalls, 0, 100);
+		Character.addToPlayState(this, _jerry);
+		_jerry.flxsprite.setPosition(300, 1580); //testing purposes
 		_jerry.flxsprite.setGraphicSize(24,24);
 		_jerry.flxsprite.updateHitbox();
 		_jerry.flxsprite.width = 20.0;
 		_jerry.flxsprite.height = 20.0;
 		_jerry.flxsprite.offset.set(4,8);
+
+		//setup bullet
+		_bullet = new FlxSprite(0,0);
+		_bullet.loadGraphic("assets/images/GD1_mindblip.png",false,16,16);
+
+		//setup taser
+		_taser = new FlxSprite(0,0);
+		_taser.loadGraphic("assets/images/GD1_taser.png",false,16,16);
 
 		super.create();
 	}
@@ -137,7 +143,7 @@ class PlayState extends FlxState
 		if (_player.end_game){ FlxG.switchState(new EndState()); }
 
 		//shoot bullet
-		if (FlxG.keys.justPressed.E){ add(_bullet); }
+		if (_player.controlled && FlxG.keys.justPressed.E){ add(_bullet); }
 		if (FlxCollision.pixelPerfectCheck(_jerry.flxsprite, _bullet)){ //bullet hits jerry
 			_player.controlled = false;
 			_jerry.getPossessed();
@@ -145,8 +151,11 @@ class PlayState extends FlxState
 			_bullet.kill();
 		}
 
-		//jerry touches blob: reset level
-		if (FlxCollision.pixelPerfectCheck(_jerry.flxsprite, _player.flxsprite)){
+		//shoot taser
+		if (_jerry.m_state == MoveState.POSSESSED && FlxG.keys.justPressed.E) {add(_taser); }
+
+		//jerry or taser touches blob: reset level
+		if (FlxCollision.pixelPerfectCheck(_jerry.flxsprite, _player.flxsprite) || FlxCollision.pixelPerfectCheck(_player.flxsprite, _taser)){
 			FlxG.switchState(new PlayState());
 		}
 

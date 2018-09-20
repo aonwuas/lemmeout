@@ -6,6 +6,7 @@ import flixel.tile.FlxTilemap;
 import Character.AnimationState;
 import Character.MoveState;
 import flixel.FlxG;
+import flixel.FlxSprite;
 /**
  * ...
  * @author Anthony Ben Jerry Rachel Steven
@@ -14,7 +15,7 @@ class NPC extends Character
 {
 
 	var a_state:AnimationState;
-	var m_state:MoveState;
+	public var m_state:MoveState;
 	var direction:Int;
 	var delay:Float = 2	;
 	var last_timestamp:Float = 0;
@@ -72,6 +73,32 @@ class NPC extends Character
 	
 	
 	function possessed(){
+
+		//shoot taser
+		if (FlxG.keys.justPressed.E)
+		{	
+			//make new taser
+			var playState:PlayState = cast FlxG.state;
+			var taser:FlxSprite = playState._taser;
+			taser.reset(flxsprite.x + flxsprite.width/2 - taser.width/2, flxsprite.y + flxsprite.height/2 - taser.height/2);
+
+			//determine velocity and rotation of taser
+			switch (flxsprite.facing){
+				case FlxObject.UP:
+					taser.angle = 0;
+					taser.velocity.y = -400;
+				case FlxObject.DOWN:
+					taser.angle = 180;
+					taser.velocity.y = 400;
+				case FlxObject.RIGHT:
+					taser.angle = 90;
+					taser.velocity.x = 400;
+				case FlxObject.LEFT:
+					taser.angle = 270;
+					taser.velocity.x = -400;
+			}
+		}
+
 		//shortcut variables
 		var _up:Bool = false;
         var _down:Bool = false;
