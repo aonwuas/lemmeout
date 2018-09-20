@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="25" height="26" tilewidth="32" tileheight="32" infinite="0" nextobjectid="18">
- <tileset firstgid="1" source="testTiles.tsx"/>
- <layer name="floor" width="25" height="26">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="25" height="25" tilewidth="32" tileheight="32" infinite="0" nextobjectid="25">
+ <tileset firstgid="1" source="background.tsx"/>
+ <layer name="Tile Layer 1" width="25" height="25">
   <data encoding="csv">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
-1,1,1,1,8,8,8,8,8,8,8,8,8,8,8,8,8,8,1,1,1,1,1,1,1,
-1,1,1,1,8,1,1,1,1,1,1,1,1,1,1,1,1,8,1,1,1,1,1,1,1,
-1,8,8,8,8,1,1,1,1,1,1,1,1,1,1,1,8,8,1,1,1,1,1,1,1,
-1,1,1,1,8,1,1,1,1,1,1,1,1,1,1,1,8,8,1,1,1,1,1,1,1,
-1,1,1,1,8,1,1,1,1,8,8,8,8,8,1,1,8,8,1,1,1,1,1,1,1,
-1,1,1,1,8,1,1,1,1,8,1,1,1,8,1,1,1,8,1,1,8,1,8,1,1,
-1,1,1,1,8,1,1,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,
-1,1,1,1,8,1,1,1,1,8,1,1,1,8,1,1,1,8,1,1,8,1,8,1,1,
-1,1,1,1,8,1,1,1,1,8,8,8,8,8,1,1,1,8,1,1,1,1,1,1,1,
-1,1,1,1,8,1,1,1,1,1,1,1,1,1,1,1,1,8,1,1,1,1,1,1,1,
-1,1,1,1,8,1,1,1,1,1,1,1,1,1,1,1,8,8,1,1,1,1,1,1,1,
-1,1,1,1,8,1,1,1,1,1,1,1,1,1,1,1,8,8,1,1,1,1,1,1,1,
-1,8,8,8,8,1,1,1,1,1,1,1,1,1,1,1,8,8,1,1,1,1,1,1,1,
-1,1,1,1,8,1,1,1,1,1,1,1,1,1,1,1,1,8,1,1,1,1,1,1,1,
-1,1,1,1,8,8,8,8,8,8,8,8,8,8,8,8,8,8,1,1,1,1,1,1,1,
-1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
+1,1,1,8,1,8,8,8,8,8,8,8,8,8,8,8,8,1,1,1,1,1,1,1,1,
+1,1,1,8,1,1,1,1,1,1,1,1,1,1,1,1,8,1,1,1,1,1,1,1,1,
+1,8,8,8,1,1,1,1,1,1,1,1,1,1,1,8,8,1,1,1,1,1,1,1,1,
+1,1,1,8,1,1,1,1,1,1,1,1,1,1,1,8,8,1,1,1,1,1,1,1,1,
+1,1,1,8,1,1,1,1,1,1,1,1,1,1,1,8,8,1,1,1,1,1,1,1,1,
+1,1,1,8,1,1,1,1,1,1,1,1,1,1,1,1,8,1,1,1,1,1,1,1,1,
+1,1,1,8,1,1,1,1,1,8,8,8,8,8,1,1,8,1,1,1,1,1,1,1,1,
+1,1,1,8,1,1,1,1,1,8,1,1,1,8,1,1,8,1,1,1,8,1,8,1,8,
+1,1,1,8,1,1,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,8,
+1,1,1,8,1,1,1,1,1,8,1,1,1,8,1,1,8,1,1,1,8,1,8,1,8,
+1,1,1,8,1,1,1,1,1,8,8,8,8,8,1,1,8,1,1,1,1,1,1,1,1,
+1,1,1,8,1,1,1,1,1,1,1,1,1,1,1,1,8,1,1,1,1,1,1,1,1,
+1,1,1,8,1,1,1,1,1,1,1,1,1,1,1,8,8,1,1,1,1,1,1,1,1,
+1,1,1,8,1,1,1,1,1,1,1,1,1,1,1,8,8,1,1,1,1,1,1,1,1,
+1,8,8,8,1,1,1,1,1,1,1,1,1,1,1,8,8,1,1,1,1,1,1,1,1,
+1,1,1,8,1,1,1,1,1,1,1,1,1,1,1,1,8,1,1,1,1,1,1,1,1,
+1,1,1,8,1,8,8,8,8,8,8,8,8,8,8,8,8,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -32,56 +31,67 @@
 </data>
  </layer>
  <objectgroup name="obstacles">
-  <object id="1" name="Test Door 1" type="BasicDoor" x="320" y="352" width="32" height="32"/>
-  <object id="2" name="Test Door 1" type="BasicDoor" x="384" y="352" width="32" height="32"/>
-  <object id="4" name="Test Door 2" type="BasicDoor" x="480" y="352" width="32" height="32"/>
-  <object id="5" name="Test Door 5" type="BasicDoor" x="672" y="352" width="32" height="32"/>
-  <object id="6" name="Test Door 4" type="BasicDoor" x="576" y="352" width="32" height="32"/>
-  <object id="7" name="Test Door 3" type="BasicDoor" x="96" y="224" width="32" height="32"/>
-  <object id="8" name="Test Door 6" type="BasicDoor" x="96" y="544" width="32" height="32"/>
-  <object id="9" name="Test Switch 1" type="BasicSwitch" x="224" y="352" width="32" height="32">
+  <object id="1" name="Spawn Bobby" type="Spawn" x="352" y="352" width="32" height="32">
    <properties>
-    <property name="Subject" value="Test Door 1"/>
+    <property name="Spawn" value="Bobby"/>
    </properties>
   </object>
-  <object id="10" name="Test Switch 2" type="BasicSwitch" x="512" y="256" width="32" height="32">
+  <object id="6" name="Basic Switch 1" type="BasicSwitch" x="192" y="352" width="32" height="32">
    <properties>
-    <property name="Subject" value="Test Door 2"/>
+    <property name="Subject" value="Basic Door 1"/>
    </properties>
   </object>
-  <object id="11" name="Test Switch 3" type="BasicSwitch" x="512" y="512" width="32" height="32">
+  <object id="7" name="Basic Door 1" type="BasicDoor" x="320" y="352" width="32" height="32"/>
+  <object id="8" name="Basic Door 1" type="BasicDoor" x="384" y="352" width="32" height="32"/>
+  <object id="9" name="Basic Door 2" type="BasicDoor" x="448" y="352" width="32" height="32"/>
+  <object id="10" name="Basic Door 3" type="BasicDoor" x="608" y="352" width="32" height="32"/>
+  <object id="11" name="Basic Door 4" type="BasicDoor" x="672" y="352" width="32" height="32"/>
+  <object id="12" name="Basic Door 5" type="BasicDoor" x="736" y="352" width="32" height="32"/>
+  <object id="13" name="Basic Door 6" type="BasicDoor" x="64" y="544" width="32" height="32"/>
+  <object id="14" name="Basic Door 7" type="BasicDoor" x="64" y="160" width="32" height="32"/>
+  <object id="15" name="Basic Switch 2" type="BasicSwitch" x="480" y="192" width="32" height="32">
    <properties>
-    <property name="Subject" value="Test Door 3"/>
+    <property name="Subject" value="Basic Door 2"/>
    </properties>
   </object>
-  <object id="12" name="Test Switch 5" type="BasicSwitch" x="32" y="544" width="32" height="32">
+  <object id="16" name="Basic Switch 3" type="BasicSwitch" x="480" y="512" width="32" height="32">
    <properties>
-    <property name="Subject" value="Test Door 5"/>
+    <property name="Subject" value="Basic Door 3"/>
    </properties>
   </object>
-  <object id="13" name="Test Switch 4" type="BasicSwitch" x="32" y="224" width="32" height="32">
+  <object id="17" name="Basic Switch 6" type="BasicSwitch" x="640" y="320" width="32" height="32">
    <properties>
-    <property name="Subject" value="Test Door 4"/>
+    <property name="Subject" value="Basic Door 6"/>
    </properties>
   </object>
-  <object id="14" name="JerrySpawn1" type="Spawn" x="416" y="288" width="32" height="32">
+  <object id="18" name="Basic Switch 4" type="BasicSwitch" x="32" y="544" width="32" height="32">
    <properties>
-    <property name="Character" value="Jerry"/>
+    <property name="Subject" value="Basic Door 4"/>
    </properties>
   </object>
-  <object id="15" name="JerrySpawn2" type="Spawn" x="544" y="192" width="32" height="32">
+  <object id="19" name="Basic Switch 7" type="BasicSwitch" x="704" y="384" width="32" height="32">
    <properties>
-    <property name="Character" value="Jerry"/>
+    <property name="Subject" value="Basic Door 7"/>
    </properties>
   </object>
-  <object id="16" name="JerrySpawn3" type="Spawn" x="128" y="160" width="32" height="32">
+  <object id="21" name="Basic Switch 5" type="BasicSwitch" x="32" y="160" width="32" height="32">
    <properties>
-    <property name="Character" value="Jerry"/>
+    <property name="Subject" value="Basic Door 5"/>
    </properties>
   </object>
-  <object id="17" name="Test Switch 6" type="BasicSwitch" x="640" y="320" width="32" height="32">
+  <object id="22" name="Spawn Jerry 1" type="Spawn" x="288" y="352" width="32" height="32">
    <properties>
-    <property name="Subject" value="Test Door 6"/>
+    <property name="Spawn" value="Jerry"/>
+   </properties>
+  </object>
+  <object id="23" name="Spawn Jerry 2" type="Spawn" x="512" y="352" width="32" height="32">
+   <properties>
+    <property name="Spawn" value="Jerry"/>
+   </properties>
+  </object>
+  <object id="24" name="Spawn Jerry 3" type="Spawn" x="96" y="352" width="32" height="32">
+   <properties>
+    <property name="Spawn" value="Jerry"/>
    </properties>
   </object>
  </objectgroup>
