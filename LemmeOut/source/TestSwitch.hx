@@ -27,4 +27,16 @@ class TestSwitch extends Switch
 				flipped = true;
 			}
 	}
+	
+	override public function unaction():Void{
+		if (flipped)
+		{
+			if (subject.isOpen())
+			{
+				subject.changeState();
+			}
+			loadGraphic(unflipped_sprite, false, 64, 64);
+			flipped = false;
+		}
+	}
 }

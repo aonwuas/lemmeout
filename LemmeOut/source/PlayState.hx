@@ -24,11 +24,11 @@ class PlayState extends FlxState
 	public var _mWalls:FlxTilemap;
 	public var doors_group:FlxTypedGroup<Door>;
 	public var switches_group:FlxTypedGroup<Switch>;
+	public var _map:TiledMap;
 
 	override public function create():Void
 	{
 		FlxG.mouse.visible = false;
-		var _map:TiledMap;
 		_map = new TiledMap(AssetPaths.test2__tmx);
 		_mWalls = new FlxTilemap();
 		_mWalls.loadMapFromArray(cast(_map.getLayer("floor"), TiledTileLayer).tileArray, _map.width, _map.height, AssetPaths.background__png, _map.tileWidth, _map.tileHeight, FlxTilemapAutoTiling.OFF, 1, 1, 3);
@@ -65,6 +65,8 @@ class PlayState extends FlxState
 		Character.addToPlayState(this, _jerry);
 		Character.addToPlayState(this, _player);
 		_player.screenCenter();
+		FlxG.camera.follow(_player.flxsprite, TOPDOWN, 1);
+		_player.flxsprite.setPosition(368, 1580);
 
 		_player.flxsprite.setGraphicSize(24,24);
 		_player.flxsprite.updateHitbox();
@@ -100,8 +102,8 @@ class PlayState extends FlxState
 					var subject_name:String = object.properties.get("Subject");
 					var _switch:Switch = new TestSwitch(subject_name, x, y);
 					switches_group.add(_switch);
-					trace("name: " + object.name + " x: " + object.x + ", y : " + object.y + ", height: " + object.height + ", width: " + object.width);
-					trace("sprite: x: " + _switch.x + ", y: " + _switch.y + ", height: " + _switch.height + ", width: " + _switch.width);
+					//trace("name: " + object.name + " x: " + object.x + ", y : " + object.y + ", height: " + object.height + ", width: " + object.width);
+					//trace("sprite: x: " + _switch.x + ", y: " + _switch.y + ", height: " + _switch.height + ", width: " + _switch.width);
 			}
 		}
 	}
@@ -155,7 +157,13 @@ class PlayState extends FlxState
 		FlxG.collide(_player.flxsprite, _mWalls);
 		FlxG.collide(_player.flxsprite, doors_group);
 		for(_switch in switches_group.members){
-			if(FlxG.pixelPerfectOverlap(_player.flxsprite, _switch)) _switch.action();
+			if (FlxG.pixelPerfectOverlap(_player.flxsprite, _switch))
+			{
+				_switch.action();
+			}
+			else{
+				_switch.unaction();
+			}
 		}
 		//trace(FlxG.overlap(_player.flxsprite, switches_group, triggerSwitch) + ", hitbox offset: " + _player.flxsprite.offset);
 	}

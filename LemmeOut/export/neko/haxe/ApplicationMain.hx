@@ -26,7 +26,7 @@ import haxe.macro.Expr;
 		
 		#if (js && html5)
 		#if (munit || utest)
-		lime.system.System.embed ("LemmeOut", null, 640, 480);
+		lime.system.System.embed ("LemmeOut", null, 900, 900);
 		#end
 		#else
 		create (null);
@@ -38,7 +38,7 @@ import haxe.macro.Expr;
 		
 		var config = {
 			
-			build: "35",
+			build: "98",
 			company: "HaxeFlixel",
 			file: "LemmeOut",
 			fps: 60,
@@ -59,7 +59,7 @@ import haxe.macro.Expr;
 					display: 0,
 					fullscreen: false,
 					hardware: true,
-					height: 480,
+					height: 900,
 					hidden: #if munit true #else false #end,
 					maximized: false,
 					minimized: false,
@@ -68,7 +68,7 @@ import haxe.macro.Expr;
 					stencilBuffer: true,
 					title: "LemmeOut",
 					vsync: false,
-					width: 640,
+					width: 900,
 					x: null,
 					y: null
 				},
@@ -92,7 +92,7 @@ import haxe.macro.Expr;
 		
 		#if (js && html5)
 		#if (munit || utest)
-		lime.system.System.embed (projectName, null, 640, 480, config);
+		lime.system.System.embed (projectName, null, 900, 900, config);
 		#end
 		#else
 		create (config);
@@ -110,7 +110,7 @@ import haxe.macro.Expr;
 		#if (lime >= "7.0.0")
 		ManifestResources.init (config);
 		
-		app.meta["build"] = "35";
+		app.meta["build"] = "98";
 		app.meta["company"] = "HaxeFlixel";
 		app.meta["file"] = "LemmeOut";
 		app.meta["name"] = "LemmeOut";
@@ -127,14 +127,14 @@ import haxe.macro.Expr;
 			element: null,
 			frameRate: 60,
 			#if !web fullscreen: false, #end
-			height: 480,
+			height: 900,
 			hidden: #if munit true #else false #end,
 			maximized: false,
 			minimized: false,
 			parameters: {},
 			resizable: true,
 			title: "LemmeOut",
-			width: 640,
+			width: 900,
 			x: null,
 			y: null,
 			

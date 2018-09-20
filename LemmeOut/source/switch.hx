@@ -23,6 +23,10 @@ class Switch extends FlxSprite
 	public function action():Void
 	{
 	}
+	
+	public function unaction():Void
+	{
+	}
 
 	public function getSubjectName():String
 	{

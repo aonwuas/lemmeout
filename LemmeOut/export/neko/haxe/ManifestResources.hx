@@ -101,6 +101,7 @@ null
 @:keep @:bind #if display private #end class __ASSET__assets_images_gd1_bensheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_gd1_blobmastersheetstun_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_gd1_jerrysheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
+@:keep @:bind #if display private #end class __ASSET__assets_images_gd1_jerrysheet_walks_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_gd1_mindblip_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_gd1_rachelsheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_gd1_stevesheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
@@ -131,7 +132,6 @@ null
 @:keep @:bind #if display private #end class __ASSET__assets_images_tiles_untitled_xcf extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_images_tiles_wall_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_tiles_wall_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_walltilesheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_music_music_goes_here_txt extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_sounds_sounds_go_here_txt extends null { }
 @:keep @:bind #if display private #end class __ASSET__flixel_sounds_beep_ogg extends null { }
