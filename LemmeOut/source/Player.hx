@@ -26,7 +26,7 @@
 	//constructor
     public function new(colliders:FlxTilemap, ?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset)
     {
-        super(colliders);
+        super(colliders, X, Y);
 		setFlxSprite(player_graphic, true, player_width, player_height);
 		setSpeed(spd);
     }

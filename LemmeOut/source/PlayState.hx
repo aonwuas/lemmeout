@@ -28,6 +28,7 @@ class PlayState extends FlxState
 	public var switches_group:FlxTypedGroup<Switch>;
 	public var _map:TiledMap;
 	public var characters:Array<Character>;
+	public var NPCS:Array<NPC>;
 
 	public var times_run:Int = 0;
 
@@ -57,6 +58,7 @@ class PlayState extends FlxState
 		switches_group = new FlxTypedGroup<Switch>();
 		add(switches_group);
 		characters = new Array<Character>();
+		NPCS = new Array<NPC>();
 
 		var tmp_map:TiledObjectLayer = cast _map.getLayer("obstacles");
 		//trace("Number of objects: " + tmp_map.objects.length);
@@ -128,7 +130,7 @@ class PlayState extends FlxState
 				_player = new Player(mWalls, x, y);
 				Character.addToPlayState(this, _player);
 				characters.push(_player);
-				FlxG.camera.follow(_player.flxsprite, TOPDOWN, 1);
+				//FlxG.camera.follow(_player.flxsprite, TOPDOWN, 1);
 				_player.flxsprite.setGraphicSize(24,24);
 				_player.flxsprite.updateHitbox();
 				_player.flxsprite.width = 20.0;
@@ -139,6 +141,7 @@ class PlayState extends FlxState
 				_jerry = new JanitorJerry(mWalls, x, y);
 				Character.addToPlayState(this, _jerry);
 				characters.push(_jerry);
+				NPCS.push(_jerry);
 				_jerry.flxsprite.setGraphicSize(24,24);
 				_jerry.flxsprite.updateHitbox();
 				_jerry.flxsprite.width = 20.0;
@@ -155,12 +158,18 @@ class PlayState extends FlxState
 
 		//shoot bullet
 		if (_player.controlled && FlxG.keys.justPressed.E){ add(_bullet); }
-		if (FlxCollision.pixelPerfectCheck(_jerry.flxsprite, _bullet)){ //bullet hits jerry
-			_player.controlled = false;
-			_jerry.getPossessed();
-			_bullet.reset(0, 0);
-			_bullet.kill();
+		
+		for(_npc in NPCS)
+		{
+			if (FlxCollision.pixelPerfectCheck(_npc.flxsprite, _bullet))
+				{ //bullet hits jerry
+					_player.controlled = false;
+					_npc.getPossessed();
+					_bullet.reset(0, 0);
+					_bullet.kill();
+				}
 		}
+
 
 		//shoot taser
 		if (_jerry.m_state == MoveState.POSSESSED && FlxG.keys.justPressed.E) {add(_taser); }
@@ -173,7 +182,7 @@ class PlayState extends FlxState
 		if (FlxCollision.pixelPerfectCheck(_jerry.flxsprite, _player.flxsprite) || FlxCollision.pixelPerfectCheck(_player.flxsprite, _taser)){
 			FlxG.switchState(new PlayState());
 		}
-
+		
 		//update
 		for(_char in characters) _char.movement();
 		super.update(elapsed);
