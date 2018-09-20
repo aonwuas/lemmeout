@@ -12,6 +12,64 @@ import openfl.Assets;
 import flixel.FlxObject;
 import flixel.util.FlxCollision;
 import flixel.FlxG;
+
+class Door extends FlxSprite{
+	var name:String;
+	public function new(X:Float=0, Y:Float=0, myName:String="null") 
+	{
+		super(X, Y);
+		loadGraphic(AssetPaths.ElectricalDoor__png, false, 8, 8);
+		immovable = true;
+		name = myName;
+	}
+	public function getName():String{
+		return name;
+	}
+}
+
+class BDoor extends FlxSprite{
+	var name:String;
+	public function new(X:Float=0, Y:Float=0, myName:String="null") 
+	{
+		super(X, Y);
+		loadGraphic(AssetPaths.ButtonDoor__png, false, 8, 8);
+		immovable = true;
+		name = myName;
+	}
+	public function getName():String{
+		return name;
+	}
+}
+
+class Switch extends FlxSprite{
+	var name:String;
+	public function new(X:Float=0, Y:Float=0, myName:String="null") 
+	{
+		super(X, Y);
+		loadGraphic(AssetPaths.ElectricalSwitch__png, false, 8, 8);
+		immovable = true;
+		name = myName;
+	}
+	
+	public function getName():String{
+		return name;
+	}
+}
+
+class BSwitch extends FlxSprite{
+	var name:String;
+	public function new(X:Float=0, Y:Float=0, myName:String="null") 
+	{
+		super(X, Y);
+		loadGraphic(AssetPaths.ButtonTile__png, false, 8, 8);
+		immovable = true;
+		name = myName;
+	}
+	public function getName():String{
+		return name;
+	}
+}
+
 class PlayState extends FlxState
 {
 
@@ -20,6 +78,12 @@ public var _bullet:FlxSprite;
 public var walls:FlxObject;
 public var exit:FlxSprite;
 public var _mWalls:FlxTilemap;
+public var _grpDoors:FlxTypedGroup<Door>;
+public var _grpSwitches:FlxTypedGroup<Switch>;
+public var _grpBDoors:FlxTypedGroup<BDoor>;
+public var _grpBSwitches:FlxTypedGroup<BSwitch>;
+public var doorsAndSwitches = new Map<>
+
 
 	override public function create():Void
 	{
@@ -41,6 +105,14 @@ public var _mWalls:FlxTilemap;
 		_mWalls.setTileProperties(9, FlxObject.NONE);
 		_mWalls.setTileProperties(10, FlxObject.NONE);
 		add(_mWalls);
+		_grpDoors = new FlxTypedGroup<Door>();
+		add(_grpDoors);
+		_grpSwitches = new FlxTypedGroup<Switch>();
+		add(_grpSwitches);
+		_grpBDoors = new FlxTypedGroup<BDoor>();
+		add(_grpBDoors);
+		_grpBSwitches = new FlxTypedGroup<BSwitch>();
+		add(_grpBSwitches);
 		
 		//setup bullet
 		_bullet = new FlxSprite(0,0);
@@ -49,11 +121,11 @@ public var _mWalls:FlxTilemap;
 
 		//setup player
 		_player = new Player();
-		_player.flxsprite.setPosition(368, 1580);
+		//_player.flxsprite.setPosition(368, 1580);
 		var tmpMap:TiledObjectLayer = cast _map.getLayer("entities");
 		for (e in tmpMap.objects)
 		{
-			placeEntities(e.type, e.xmlData.x);
+			placeEntities(e.type, e.xmlData.x, e.name);
 		}
 		Character.addToPlayState(this, _player);
 		FlxG.camera.follow(_player.flxsprite, TOPDOWN, 1);
@@ -66,16 +138,32 @@ public var _mWalls:FlxTilemap;
 		super.create();
 	}
 	
-	function placeEntities(entityName:String, entityData:Xml):Void
+	function placeEntities(entityType:String, entityData:Xml, entityName:String):Void
 	{
 		var x:Int = Std.parseInt(entityData.get("x"));
 		var y:Int = Std.parseInt(entityData.get("y"));
-		if (entityName == "start")
+		if (entityType == "start")
 		{
          _player.flxsprite.x = x;
 		 _player.flxsprite.y = y;
 		}
+		else if (entityType == "door"){
+			_grpDoors.add(new Door(x, y, entityName));
+		}
+		else if (entityType == "switch"){
+			_grpSwitches.add(new Switch(x, y, entityName));
+		}
+		else if (entityType == "bdoor"){
+			_grpBDoors.add(new BDoor(x, y, entityName));
+		}
+		else if (entityType == "bswitch"){
+			_grpBSwitches.add(new BSwitch(x, y, entityName));
+		}
 	
+	}
+	
+	function pairDoorToSwitch{
+		
 	}
  
 	override public function update(elapsed:Float):Void
@@ -84,5 +172,7 @@ public var _mWalls:FlxTilemap;
 		_player.movement();
 		super.update(elapsed);
 		FlxG.collide(_player.flxsprite, _mWalls);
+		FlxG.collide(_player.flxsprite, _grpDoors);
+		FlxG.collide(_player.flxsprite, _grpBDoors);
 	}
 }
