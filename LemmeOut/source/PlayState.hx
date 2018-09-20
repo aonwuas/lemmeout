@@ -153,6 +153,10 @@ class PlayState extends FlxState
 
 		//shoot taser
 		if (_jerry.m_state == MoveState.POSSESSED && FlxG.keys.justPressed.E) {add(_taser); }
+		if (FlxG.collide(_taser, _mWalls) || FlxG.collide(_taser, doors_group)){ //taser collision
+			_taser.reset(0, 0);
+			_taser.kill();
+		}
 
 		//jerry or taser touches blob: reset level
 		if (FlxCollision.pixelPerfectCheck(_jerry.flxsprite, _player.flxsprite) || FlxCollision.pixelPerfectCheck(_player.flxsprite, _taser)){
