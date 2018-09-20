@@ -188,13 +188,15 @@ class PlayState extends FlxState
 		super.update(elapsed);
 		FlxG.collide(_player.flxsprite, _mWalls);
 		FlxG.collide(_player.flxsprite, doors_group);
-		for(_switch in switches_group.members){
-			if (FlxG.pixelPerfectOverlap(_player.flxsprite, _switch))
-			{
-				_switch.action();
-			}
-			else{
-				_switch.unaction();
+		for(_char in characters){
+			for(_switch in switches_group.members){
+				if (FlxG.pixelPerfectOverlap(_char.flxsprite, _switch))
+				{
+					_switch.action();
+				}
+				else{
+					_switch.unaction();
+				}
 			}
 		}
 	}

@@ -4,15 +4,16 @@ import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
 
-class BasicSwitch extends Switch
+class RPIButton extends Switch
 {	
 	public function new(_sub:String, ?x:Float = 0, ?y:Float = 0)
 	{
 		super(_sub, x, y);
 		solid = false;
-		unflipped_sprite = "assets/images/Tiles/ButtonTile.png";
-		flipped_sprite = "assets/images/Tiles/PressedButtonTile.png";
+		unflipped_sprite = "assets/images/Tiles/RPIButtonTile.png";
+		flipped_sprite = "assets/images/Tiles/DepressedRPIButtonTile.png";
 		loadGraphic(unflipped_sprite, false, 64, 64);
+		type = "RPIButton";
 	}
 
 	override public function action():Void
