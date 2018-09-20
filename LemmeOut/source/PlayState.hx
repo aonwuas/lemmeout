@@ -24,6 +24,7 @@ class PlayState extends FlxState
 	public var _mWalls:FlxTilemap;
 	public var doors_group:FlxTypedGroup<Door>;
 	public var switches_group:FlxTypedGroup<Switch>;
+	public var characters:Array<Character>
 
 	override public function create():Void
 	{
@@ -50,6 +51,7 @@ class PlayState extends FlxState
 		add(doors_group);
 		switches_group = new FlxTypedGroup<Switch>();
 		add(switches_group);
+		characters = new Array<Character>();
 
 		var tmp_map:TiledObjectLayer = cast _map.getLayer("obstacles");
 		placeObjects(tmp_map.objects, _mWalls);
