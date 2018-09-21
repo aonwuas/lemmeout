@@ -20,6 +20,7 @@ class PlayState extends FlxState
 	var _player:Player;
 	var _jerry:JanitorJerry;
 	var _steve:ScienceSteve;
+	var _ben:BurlyBen;
 	public var _bullet:FlxSprite;
 	public var _taser:FlxSprite;
 	public var walls:FlxObject;
@@ -27,6 +28,7 @@ class PlayState extends FlxState
 	public var _mWalls:FlxTilemap;
 	public var doors_group:FlxTypedGroup<Door>;
 	public var switches_group:FlxTypedGroup<Switch>;
+	public var box_group:FlxTypedGroup<Box>;
 	public var _map:TiledMap;
 	public var characters:Array<Character>;
 	public var NPCS:Array<NPC>;
@@ -58,6 +60,8 @@ class PlayState extends FlxState
 		add(doors_group);
 		switches_group = new FlxTypedGroup<Switch>();
 		add(switches_group);
+		box_group = new FlxTypedGroup<Box>();
+		add(box_group);
 		characters = new Array<Character>();
 		NPCS = new Array<NPC>();
 
@@ -106,6 +110,8 @@ class PlayState extends FlxState
 					var character:String = object.properties.get("Character");
 					//trace("Added Character at position (" + x + ", " + y +")");
 					spawnCharacter(character, x, y, mWalls);
+				case "Box":
+					box_group.add(new Box(x, y));
 			}
 		}
 	}
@@ -162,8 +168,19 @@ class PlayState extends FlxState
 				_steve.flxsprite.updateHitbox();
 				_steve.flxsprite.width = 20.0;
 				_steve.flxsprite.height = 20.0;
-				_steve.flxsprite.offset.set(4, 8);
-				trace("Added Steve at position (" + x + ", " + y +")");
+				_steve.flxsprite.offset.set(4,8);
+				//trace("Added Steve at position (" + x + ", " + y +")");
+			case "Ben":
+				_ben = new BurlyBen(mWalls, x, y);
+				Character.addToPlayState(this, _ben);
+				characters.push(_ben);
+				NPCS.push(_ben);
+				_ben.flxsprite.setGraphicSize(24,24);
+				_ben.flxsprite.updateHitbox();
+				_ben.flxsprite.width = 20.0;
+				_ben.flxsprite.height = 20.0;
+				_ben.flxsprite.offset.set(4,8);
+				//trace("Added Steve at position (" + x + ", " + y +")");
 		}
 	}
 
@@ -176,6 +193,7 @@ class PlayState extends FlxState
 		if (_player.controlled && FlxG.keys.justPressed.E){ add(_bullet); }
 		FlxG.collide(_bullet, doors_group);
 		FlxG.collide(_bullet, _mWalls);
+		FlxG.collide(_bullet, box_group);
 		
 		for(_npc in NPCS)
 		{
@@ -187,11 +205,19 @@ class PlayState extends FlxState
 					_bullet.kill();
 				}
 				FlxG.collide(_npc.flxsprite, doors_group);
+				FlxG.collide(_npc.flxsprite, box_group);
 				if (FlxCollision.pixelPerfectCheck(_npc.flxsprite, _player.flxsprite)){
 					FlxG.switchState(new PlayState());
 				}
 			//shoot taser
 			if (_npc.m_state == MoveState.POSSESSED && FlxG.keys.justPressed.E && _npc.getName() == "jerry") {add(_taser); }
+			for (box in box_group){
+				if (FlxG.collide(_npc.flxsprite, box) && _npc.getName() == "ben")
+				{ //Ben moves box
+					box.soften();
+					trace("yeet");
+				}
+			}
 		}
 
 
@@ -208,20 +234,31 @@ class PlayState extends FlxState
 		//update
 		for(_char in characters) _char.movement();
 		super.update(elapsed);
-		if (FlxG.collide(_bullet, _mWalls) || FlxG.collide(_bullet, doors_group)){ //taser collision
+		if (FlxG.collide(_bullet, _mWalls) || FlxG.collide(_bullet, doors_group) || FlxG.collide(_bullet, box_group)){ //taser collision
 			_bullet.reset(0, 0);
 			_bullet.kill();
 		}
 		FlxG.collide(_player.flxsprite, _mWalls);
 		FlxG.collide(_player.flxsprite, doors_group);
-		for(_char in characters){
-			for(_switch in switches_group.members){
-				if ((FlxG.pixelPerfectOverlap(_taser, _switch)) && !_switch.getPressure())
-				{
-					_switch.action();
+		FlxG.collide(_player.flxsprite, box_group);
+		FlxG.collide(box_group, _mWalls);
+		FlxG.collide(box_group, doors_group);
+		for (_char in characters){
+			for (_box in box_group.members){
+				if (FlxG.collide(_char.flxsprite, _box) && _char.getName() == "ben"){
+					_box.soften();
 				}
-				else if(_switch.getPressure()){
-					_switch.unaction();
+			}
+		}
+		for(_switch in switches_group.members){
+			if ((FlxG.pixelPerfectOverlap(_taser, _switch)) && !_switch.getPressure())
+			{
+				_switch.action();
+				continue;
+			}
+			for (_box in box_group.members){
+				if ((FlxG.pixelPerfectOverlap(_box, _switch)) && _switch.getPressure()){
+					_switch.action();
 				}
 			}
 		}
