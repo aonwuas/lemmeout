@@ -162,7 +162,8 @@ class PlayState extends FlxState
 				_steve.flxsprite.updateHitbox();
 				_steve.flxsprite.width = 20.0;
 				_steve.flxsprite.height = 20.0;
-				_steve.flxsprite.offset.set(4,8);
+				_steve.flxsprite.offset.set(4, 8);
+				trace("Added Steve at position (" + x + ", " + y +")");
 		}
 	}
 
