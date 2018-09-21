@@ -219,12 +219,6 @@ class PlayState extends FlxState
 				}
 			//shoot taser
 			if (_npc.m_state == MoveState.POSSESSED && FlxG.keys.justPressed.E && _npc.getName() == "jerry") {add(_taser); }
-			for (box in box_group){
-				if (FlxG.collide(_npc.flxsprite, box) && _npc.getName() == "ben")
-				{ //Ben moves box
-					box.soften();
-				}
-			}
 		}
 
 

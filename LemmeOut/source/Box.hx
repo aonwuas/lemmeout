@@ -22,4 +22,9 @@ class Box extends FlxSprite
 	{
 		immovable = false;
 	}
+	
+		public function harden():Void
+	{
+		immovable = true;
+	}
 }

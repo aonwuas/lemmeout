@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="27" height="65" tilewidth="32" tileheight="32" infinite="0" nextobjectid="111">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="27" height="65" tilewidth="32" tileheight="32" infinite="0" nextobjectid="112">
  <tileset firstgid="1" source="testTiles.tsx"/>
  <tileset firstgid="11" source="testObjects.tsx"/>
  <layer name="floor" width="27" height="65">
@@ -193,7 +193,7 @@
     <property name="Subject" value="lastDoor4"/>
    </properties>
   </object>
-  <object id="62" name="Spawn Bobby" type="Spawn" x="385.75" y="42" width="29" height="24">
+  <object id="62" name="Spawn Bobby" type="Spawn" x="765.333" y="1191" width="29" height="24">
    <properties>
     <property name="Character" value="Bobby"/>
    </properties>
