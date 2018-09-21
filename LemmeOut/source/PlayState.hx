@@ -19,6 +19,7 @@ class PlayState extends FlxState
 	
 	var _player:Player;
 	var _jerry:JanitorJerry;
+	var _steve:ScienceSteve;
 	public var _bullet:FlxSprite;
 	public var _taser:FlxSprite;
 	public var walls:FlxObject;
@@ -152,6 +153,16 @@ class PlayState extends FlxState
 				_jerry.flxsprite.height = 20.0;
 				_jerry.flxsprite.offset.set(4,8);
 				//trace("Added Jerry at position (" + x + ", " + y +")");
+			case "Steve":
+				_steve = new ScienceSteve(mWalls, x, y);
+				Character.addToPlayState(this, _steve);
+				characters.push(_steve);
+				NPCS.push(_steve);
+				_steve.flxsprite.setGraphicSize(24,24);
+				_steve.flxsprite.updateHitbox();
+				_steve.flxsprite.width = 20.0;
+				_steve.flxsprite.height = 20.0;
+				_steve.flxsprite.offset.set(4,8);
 		}
 	}
 
@@ -168,7 +179,7 @@ class PlayState extends FlxState
 		for(_npc in NPCS)
 		{
 			if (FlxCollision.pixelPerfectCheck(_npc.flxsprite, _bullet))
-				{ //bullet hits jerry
+				{ //bullet hits npc
 					_player.controlled = false;
 					_npc.getPossessed();
 					_bullet.reset(0, 0);
@@ -178,8 +189,8 @@ class PlayState extends FlxState
 				if (FlxCollision.pixelPerfectCheck(_npc.flxsprite, _player.flxsprite)){
 					FlxG.switchState(new PlayState());
 				}
-					//shoot taser
-		if (_npc.m_state == MoveState.POSSESSED && FlxG.keys.justPressed.E) {add(_taser); }
+			//shoot taser
+			if (_npc.m_state == MoveState.POSSESSED && FlxG.keys.justPressed.E && _npc.getName() == "jerry") {add(_taser); }
 		}
 
 

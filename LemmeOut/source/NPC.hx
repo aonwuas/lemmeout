@@ -23,6 +23,7 @@ class NPC extends Character
 	var default_behavior:MoveState;
 	var _justX:Bool = false;
 	var _justY:Bool = false;
+	var name:String;
 		
 	public function new(colliders:FlxTilemap, ?x:Float=0, ?y:Float=0, ?start_behavior:MoveState = MoveState.PATROL) 
 	{

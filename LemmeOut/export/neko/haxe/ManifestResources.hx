@@ -92,6 +92,7 @@ null
 
 @:keep @:bind #if display private #end class __ASSET__assets_data_background_tsx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_data_goes_here_txt extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_data_level2_tmx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels_level1_tmx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels_walltilesheet_tsx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_test_tmx extends null { }
@@ -111,6 +112,7 @@ null
 @:keep @:bind #if display private #end class __ASSET__assets_images_gd1_taser_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_gd1_tonysheet_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_images_go_here_txt extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_block_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_tiles_block_xcf extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_images_tiles_buttondoor_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_tiles_buttondoor_xcf extends null { }
@@ -134,7 +136,6 @@ null
 @:keep @:bind #if display private #end class __ASSET__assets_images_tiles_rpibuttontile_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_tiles_rpibuttontile_xcf extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_images_tiles_untitled_xcf extends null { }
-@:keep @:bind #if display private #end class __ASSET__assets_images_tiles_wall_png extends flash.display.BitmapData { public function new () { super (0, 0, true, 0); } }
 @:keep @:bind #if display private #end class __ASSET__assets_images_tiles_wall_xcf extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_music_music_goes_here_txt extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_sounds_sounds_go_here_txt extends null { }
