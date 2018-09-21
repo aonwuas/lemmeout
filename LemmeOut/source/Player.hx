@@ -94,6 +94,7 @@
 		//controlling player
 		if (controlled)
 		{
+			FlxG.camera.follow(this.flxsprite, TOPDOWN, 1);
 			//turn green when space pressed
 			switch (flxsprite.facing){
 				case FlxObject.UP:

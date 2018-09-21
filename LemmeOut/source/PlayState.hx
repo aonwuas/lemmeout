@@ -94,7 +94,11 @@ class PlayState extends FlxState
 					//trace("Added Door at position (" + x + ", " + y +")");
 				case "BasicSwitch":
 					var subject_name:String = object.properties.get("Subject");
+					var _pressure:String = object.properties.get("Pressure");
 					var _switch:Switch = new BasicSwitch(subject_name, x, y);
+					if (_pressure == "true"){
+						_switch.pressurize();
+					}
 					switches_group.add(_switch);
 					//trace("Added Switch at position (" + x + ", " + y +")");
 				case "Spawn":
@@ -158,6 +162,8 @@ class PlayState extends FlxState
 
 		//shoot bullet
 		if (_player.controlled && FlxG.keys.justPressed.E){ add(_bullet); }
+		FlxG.collide(_bullet, doors_group);
+		FlxG.collide(_bullet, _mWalls);
 		
 		for(_npc in NPCS)
 		{
@@ -168,33 +174,41 @@ class PlayState extends FlxState
 					_bullet.reset(0, 0);
 					_bullet.kill();
 				}
+				FlxG.collide(_npc.flxsprite, doors_group);
+				if (FlxCollision.pixelPerfectCheck(_npc.flxsprite, _player.flxsprite)){
+					FlxG.switchState(new PlayState());
+				}
+					//shoot taser
+		if (_npc.m_state == MoveState.POSSESSED && FlxG.keys.justPressed.E) {add(_taser); }
 		}
 
 
-		//shoot taser
-		if (_jerry.m_state == MoveState.POSSESSED && FlxG.keys.justPressed.E) {add(_taser); }
 		if (FlxG.collide(_taser, _mWalls) || FlxG.collide(_taser, doors_group)){ //taser collision
 			_taser.reset(0, 0);
 			_taser.kill();
 		}
 
 		//jerry or taser touches blob: reset level
-		if (FlxCollision.pixelPerfectCheck(_jerry.flxsprite, _player.flxsprite) || FlxCollision.pixelPerfectCheck(_player.flxsprite, _taser)){
+		if (FlxCollision.pixelPerfectCheck(_player.flxsprite, _taser)){
 			FlxG.switchState(new PlayState());
 		}
 		
 		//update
 		for(_char in characters) _char.movement();
 		super.update(elapsed);
+		if (FlxG.collide(_bullet, _mWalls) || FlxG.collide(_bullet, doors_group)){ //taser collision
+			_bullet.reset(0, 0);
+			_bullet.kill();
+		}
 		FlxG.collide(_player.flxsprite, _mWalls);
 		FlxG.collide(_player.flxsprite, doors_group);
 		for(_char in characters){
 			for(_switch in switches_group.members){
-				if (FlxG.pixelPerfectOverlap(_char.flxsprite, _switch))
+				if ((FlxG.pixelPerfectOverlap(_taser, _switch)) && !_switch.getPressure())
 				{
 					_switch.action();
 				}
-				else{
+				else if(_switch.getPressure()){
 					_switch.unaction();
 				}
 			}

@@ -1,6 +1,7 @@
 package;
 import flixel.tile.FlxTilemap;
 import Character.AnimationState;
+import flixel.FlxG;
 /**
  * ...
  * @author Anthony Ben Jerry Rachel Steven
@@ -29,6 +30,7 @@ class JanitorJerry extends NPC
 	override public function getPossessed() 
 	{
 		super.getPossessed();
+		FlxG.camera.follow(this.flxsprite, TOPDOWN, 1);
 	}
 	
 }

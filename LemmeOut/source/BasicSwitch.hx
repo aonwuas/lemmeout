@@ -27,5 +27,19 @@ class BasicSwitch extends Switch
 				flipped = true;
 			}
 	}
+	
+	override public function unaction():Void
+	{
+		if (subject.isOpen()){
+			subject.changeState();
+		}
+		loadGraphic(unflipped_sprite, false, 32, 32);
+		flipped = false;
+	}
+	
+	override public function pressurize():Void
+	{
+		pressure = true;
+	}
 
 }
