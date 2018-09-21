@@ -23,7 +23,6 @@ class BasicSwitch extends Switch
 				if(!subject.isOpen())
 				{
 					subject.changeState();
-					trace("did the thing");
 				}
 				loadGraphic(flipped_sprite, false, 32, 32);
 				return;
