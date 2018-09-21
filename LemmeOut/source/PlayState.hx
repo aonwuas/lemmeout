@@ -36,7 +36,7 @@ class PlayState extends FlxState
 	{
 		trace("Times create has been run: " + (times_run += 1));
 		FlxG.mouse.visible = false;
-		_map = new TiledMap(AssetPaths.test__tmx);
+		_map = new TiledMap(AssetPaths.test2__tmx);
 		_mWalls = new FlxTilemap();
 		_mWalls.loadMapFromArray(cast(_map.getLayer("floor"), TiledTileLayer).tileArray, _map.width, _map.height, AssetPaths.background__png, _map.tileWidth, _map.tileHeight, FlxTilemapAutoTiling.OFF, 1, 1, 3);
 		_mWalls.follow();
@@ -130,7 +130,7 @@ class PlayState extends FlxState
 				_player = new Player(mWalls, x, y);
 				Character.addToPlayState(this, _player);
 				characters.push(_player);
-				//FlxG.camera.follow(_player.flxsprite, TOPDOWN, 1);
+				FlxG.camera.follow(_player.flxsprite, TOPDOWN, 1);
 				_player.flxsprite.setGraphicSize(24,24);
 				_player.flxsprite.updateHitbox();
 				_player.flxsprite.width = 20.0;
