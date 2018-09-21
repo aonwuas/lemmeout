@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="27" height="65" tilewidth="32" tileheight="32" infinite="0" nextobjectid="74">
+<map version="1.0" tiledversion="1.1.6" orientation="orthogonal" renderorder="right-down" width="27" height="65" tilewidth="32" tileheight="32" infinite="0" nextobjectid="75">
  <tileset firstgid="1" source="testTiles.tsx"/>
  <tileset firstgid="11" source="testObjects.tsx"/>
  <layer name="floor" width="27" height="65">
@@ -231,7 +231,12 @@
    </properties>
   </object>
   <object id="72" name="Basic Door 10" type="BasicDoor" x="450" y="1379" width="30" height="28"/>
-  <object id="73" name="Spawn Jerry 3" type="Spawn" x="36.5" y="1317" width="23" height="32">
+  <object id="73" name="Spawn Steve 1" type="Spawn" x="259.5" y="1249" width="23" height="32">
+   <properties>
+    <property name="Character" value="Steve"/>
+   </properties>
+  </object>
+  <object id="74" name="Spawn Jerry 3" type="Spawn" x="35.4091" y="1314.27" width="23" height="32">
    <properties>
     <property name="Character" value="Jerry"/>
    </properties>
