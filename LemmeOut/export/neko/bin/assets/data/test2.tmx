@@ -193,7 +193,7 @@
     <property name="Subject" value="lastDoor4"/>
    </properties>
   </object>
-  <object id="62" name="Spawn Bobby" type="Spawn" x="765.333" y="1191" width="29" height="24">
+  <object id="62" name="Spawn Bobby" type="Spawn" x="352" y="1571" width="29" height="24">
    <properties>
     <property name="Character" value="Bobby"/>
    </properties>

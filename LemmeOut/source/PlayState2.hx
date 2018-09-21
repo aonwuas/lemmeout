@@ -212,7 +212,7 @@ class PlayState2 extends FlxState
 				FlxG.collide(_npc.flxsprite, doors_group);
 				FlxG.collide(_npc.flxsprite, box_group);
 				if (FlxCollision.pixelPerfectCheck(_npc.flxsprite, _player.flxsprite)){
-					FlxG.switchState(new PlayState());
+					FlxG.switchState(new PlayState2());
 				}
 			//shoot taser
 			if (_npc.m_state == MoveState.POSSESSED && FlxG.keys.justPressed.E && _npc.getName() == "jerry") {add(_taser); }
@@ -220,7 +220,6 @@ class PlayState2 extends FlxState
 				if (FlxG.collide(_npc.flxsprite, box) && _npc.getName() == "ben")
 				{ //Ben moves box
 					box.soften();
-					trace("yeet");
 				}
 			}
 		}
@@ -233,7 +232,7 @@ class PlayState2 extends FlxState
 
 		//jerry or taser touches blob: reset level
 		if (FlxCollision.pixelPerfectCheck(_player.flxsprite, _taser)){
-			FlxG.switchState(new PlayState());
+			FlxG.switchState(new PlayState2());
 		}
 		
 		//update

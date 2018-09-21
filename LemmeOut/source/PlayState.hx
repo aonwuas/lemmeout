@@ -190,7 +190,7 @@ class PlayState extends FlxState
 	override public function update(elapsed:Float):Void
 	{
 		//testing purposes: END GAME
-		if (_player.end_game){ FlxG.switchState(new EndState()); }
+		if (_player.end_game){ FlxG.switchState(new PlayState2()); }
 		
 		if (FlxCollision.pixelPerfectCheck(_player.flxsprite, end))
 		{
