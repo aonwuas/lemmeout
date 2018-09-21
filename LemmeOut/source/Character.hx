@@ -122,6 +122,10 @@ class Character{
 					flxsprite.setFacingFlip(flxsprite.facing, false, false);
 		}
 	}
+	
+	public function getName():String{
+		return "null";
+	}
 }
 
 @:enum

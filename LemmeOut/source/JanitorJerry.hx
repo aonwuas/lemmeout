@@ -37,4 +37,8 @@ class JanitorJerry extends NPC
 		FlxG.camera.follow(this.flxsprite, TOPDOWN, 1);
 	}
 	
+	override public function getName():String{
+		return "jerry";
+	}
+	
 }

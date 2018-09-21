@@ -14,7 +14,7 @@ import flixel.util.FlxCollision;
 import flixel.FlxG;
 import Character.MoveState;
 
-class PlayState extends FlxState
+class PlayState2 extends FlxState
 {
 	
 	var _player:Player;
@@ -39,7 +39,7 @@ class PlayState extends FlxState
 	override public function create():Void
 	{
 		FlxG.mouse.visible = false;
-		_map = new TiledMap(AssetPaths.test2__tmx);
+		_map = new TiledMap(AssetPaths.level2__tmx);
 		_mWalls = new FlxTilemap();
 		_mWalls.loadMapFromArray(cast(_map.getLayer("floor"), TiledTileLayer).tileArray, _map.width, _map.height, AssetPaths.background__png, _map.tileWidth, _map.tileHeight, FlxTilemapAutoTiling.OFF, 1, 1, 3);
 		_mWalls.follow();
@@ -108,10 +108,8 @@ class PlayState extends FlxState
 					//trace("Added Switch at position (" + x + ", " + y +")");
 				case "Spawn":
 					var character:String = object.properties.get("Character");
-					var behavior:String = object.properties.get("Behavior");
-					var direction:String = object.properties.get("Direction");
 					//trace("Added Character at position (" + x + ", " + y +")");
-					spawnCharacter(character, x, y, mWalls, behavior, direction);
+					spawnCharacter(character, x, y, mWalls);
 				case "Box":
 					box_group.add(new Box(x, y));
 				case "End":
@@ -138,7 +136,7 @@ class PlayState extends FlxState
 		}
 	}
 
-	public function spawnCharacter(character:String, x:Float, y:Float, mWalls:FlxTilemap, ?behavior:String="PATROL", ?direction:String="DOWN")
+	public function spawnCharacter(character:String, x:Float, y:Float, mWalls:FlxTilemap)
 	{
 		switch(character)
 		{
@@ -154,7 +152,7 @@ class PlayState extends FlxState
 				_player.flxsprite.offset.set(4,8);
 				//trace("Added Bobby at position (" + x + ", " + y +")");
 			case "Jerry":
-				_jerry = new JanitorJerry(mWalls, x, y, behavior, direction, _player);
+				_jerry = new JanitorJerry(mWalls, x, y);
 				Character.addToPlayState(this, _jerry);
 				characters.push(_jerry);
 				NPCS.push(_jerry);
@@ -191,13 +189,11 @@ class PlayState extends FlxState
 
 	override public function update(elapsed:Float):Void
 	{
-		//testing purposes: END GAME
-		if (_player.end_game){ FlxG.switchState(new EndState()); }
+		
 		if (FlxCollision.pixelPerfectCheck(_player.flxsprite, end))
 		{
-			FlxG.switchState(new PlayState2());
+			FlxG.switchState(new EndState());
 		}
-
 		//shoot bullet
 		if (_player.controlled && FlxG.keys.justPressed.E){ add(_bullet); }
 		FlxG.collide(_bullet, doors_group);
@@ -216,11 +212,17 @@ class PlayState extends FlxState
 				FlxG.collide(_npc.flxsprite, doors_group);
 				FlxG.collide(_npc.flxsprite, box_group);
 				if (FlxCollision.pixelPerfectCheck(_npc.flxsprite, _player.flxsprite)){
-					trace("Killed by NPC at " + _npc.flxsprite.getPosition());
 					FlxG.switchState(new PlayState());
 				}
 			//shoot taser
 			if (_npc.m_state == MoveState.POSSESSED && FlxG.keys.justPressed.E && _npc.getName() == "jerry") {add(_taser); }
+			for (box in box_group){
+				if (FlxG.collide(_npc.flxsprite, box) && _npc.getName() == "ben")
+				{ //Ben moves box
+					box.soften();
+					trace("yeet");
+				}
+			}
 		}
 
 
@@ -231,7 +233,6 @@ class PlayState extends FlxState
 
 		//jerry or taser touches blob: reset level
 		if (FlxCollision.pixelPerfectCheck(_player.flxsprite, _taser)){
-			trace("Killed by " + _taser.getPosition());
 			FlxG.switchState(new PlayState());
 		}
 		

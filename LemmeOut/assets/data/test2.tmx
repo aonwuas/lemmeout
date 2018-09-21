@@ -193,12 +193,12 @@
     <property name="Subject" value="lastDoor4"/>
    </properties>
   </object>
-  <object id="62" name="Spawn Bobby" type="Spawn" x="354" y="1573" width="29" height="24">
+  <object id="62" name="Spawn Bobby" type="Spawn" x="354" y="1571" width="29" height="24">
    <properties>
     <property name="Character" value="Bobby"/>
    </properties>
   </object>
-  <object id="63" name="end" type="end" x="385" y="1" width="28" height="30"/>
+  <object id="63" name="End" type="End" x="385" y="1" width="28" height="30"/>
   <object id="65" name="Spawn Jerry 1" type="Spawn" x="354" y="1512" width="23" height="32">
    <properties>
     <property name="Character" value="Jerry"/>
