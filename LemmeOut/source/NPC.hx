@@ -10,6 +10,7 @@ import Character.MoveState;
 import flixel.FlxG;
 import flixel.util.FlxPath;
 import flixel.math.FlxPoint;
+import flixel.FlxSprite;
 /**
  * ...
  * @author Anthony Ben Jerry Rachel Steven
@@ -18,7 +19,7 @@ class NPC extends Character
 {
 
 	var a_state:AnimationState;
-	var m_state:MoveState;
+	public var m_state:MoveState;
 	var direction:Int;
 	var delay:Float = 2	;
 	var last_timestamp:Float = 0;
@@ -34,20 +35,35 @@ class NPC extends Character
 	var is_returning:Bool = false;
 	var start_direction:Int;
 		
-	public function new(colliders:FlxTilemap, ?x:Float=0, ?y:Float=0, ?start_behavior:MoveState = MoveState.PATROL, ?target:Player=null) 
+	public function new(colliders:FlxTilemap, ?x:Float=0, ?y:Float=0, s_bev:String, s_dir: String, ?target:Player=null) 
 	{
 		super(colliders, x, y);
-		default_behavior = start_behavior;
+		switch(s_bev){
+			case "PATROL":
+				default_behavior = MoveState.PATROL;
+			case "LOOK":
+				default_behavior = MoveState.LOOK;
+			case "HUNT":
+				default_behavior = MoveState.HUNT;
+		}
+		switch(s_dir){
+			case "UP":
+				start_direction = FlxObject.UP;
+			case "LEFT":
+				start_direction = FlxObject.LEFT;
+			case "DOWN":
+				start_direction = FlxObject.DOWN;
+			case "RIGHT":
+				start_direction = FlxObject.RIGHT;
+		}
 		m_state = MoveState.PATROL;
-		direction = FlxObject.DOWN;
-		start_direction = direction;
+		direction = start_direction;
 		player = target;
 		flxsprite.path = new FlxPath();
 		start_pos = flxsprite.getMidpoint().add(16, 16);
-		trace(start_pos);
 	}
 	
-	public function movement(){
+	override public function movement(){
 		if (los() && m_state != MoveState.POSSESSED){
 			m_state = MoveState.CHASE;
 		}
@@ -103,6 +119,7 @@ class NPC extends Character
 	
 	public function getPossessed(){
 		m_state = MoveState.POSSESSED;
+		flxsprite.path = null;
 		switch(direction){
 			case FlxObject.UP:
 				flxsprite.animation.play(AnimationState.P_BACK);
@@ -116,6 +133,32 @@ class NPC extends Character
 	
 	
 	function possessed(){
+
+		//shoot taser
+		if (FlxG.keys.justPressed.E)
+		{	
+			//make new taser
+			var playState:PlayState = cast FlxG.state;
+			var taser:FlxSprite = playState._taser;
+			taser.reset(flxsprite.x + flxsprite.width/2 - taser.width/2, flxsprite.y + flxsprite.height/2 - taser.height/2);
+
+			//determine velocity and rotation of taser
+			switch (flxsprite.facing){
+				case FlxObject.UP:
+					taser.angle = 0;
+					taser.velocity.y = -400;
+				case FlxObject.DOWN:
+					taser.angle = 180;
+					taser.velocity.y = 400;
+				case FlxObject.RIGHT:
+					taser.angle = 90;
+					taser.velocity.x = 400;
+				case FlxObject.LEFT:
+					taser.angle = 270;
+					taser.velocity.x = -400;
+			}
+		}
+
 		//shortcut variables
 		var _up:Bool = false;
         var _down:Bool = false;
@@ -158,6 +201,7 @@ class NPC extends Character
 			}
 
 			if (FlxG.keys.justPressed.SPACE) {
+				flxsprite.path = new FlxPath();
 				var points:Array<FlxPoint> = walls.findPath(flxsprite.getMidpoint(), start_pos, true, false, FlxTilemapDiagonalPolicy.NONE);
 				flxsprite.path.start(points, 200, FlxPath.FORWARD);
 				is_returning = true;

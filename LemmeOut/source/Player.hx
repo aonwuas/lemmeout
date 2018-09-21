@@ -9,6 +9,9 @@
 
  class Player extends Character
  {
+	//testing purposes: END GAME
+	public var end_game:Bool = false;
+
 	//initial variables
     public var spd:Float = 200;
 	public var controlled:Bool = true;
@@ -23,7 +26,7 @@
 	//constructor
     public function new(colliders:FlxTilemap, ?X:Float=0, ?Y:Float=0, ?SimpleGraphic:FlxGraphicAsset)
     {
-        super(colliders);
+        super(colliders, X, Y);
 		setFlxSprite(player_graphic, true, player_width, player_height);
 		setSpeed(spd);
     }
@@ -43,8 +46,14 @@
 	}
 
 	//movement logic
-    public function movement():Void
+    override public function movement():Void
     {
+
+		//testing purposes: END GAME
+		if (controlled && FlxG.keys.justPressed.G){
+			end_game = true;
+		}
+
 		FlxG.collide(flxsprite, walls);
 		
 		//shortcut variables
@@ -85,6 +94,7 @@
 		//controlling player
 		if (controlled)
 		{
+			FlxG.camera.follow(this.flxsprite, TOPDOWN, 1);
 			//turn green when space pressed
 			switch (flxsprite.facing){
 				case FlxObject.UP:

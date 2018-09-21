@@ -199,11 +199,9 @@
    </properties>
   </object>
   <object id="63" name="end" type="end" x="385" y="1" width="28" height="30"/>
-  <object id="65" name="Spawn Jerry 1" type="Spawn" x="354" y="1512" width="23" height="32">
+  <object id="65" name="Spawn Jerry 1" type="Spawn" x="292" y="1567" width="23" height="32">
    <properties>
     <property name="Character" value="Jerry"/>
-	<property name="Behavior" value="PATROL"/>
-	<property name="Direction" value = "RIGHT"/>
    </properties>
   </object>
   <object id="66" name="Spawn Jerry 2" type="Spawn" x="227.5" y="1455" width="23" height="32">
