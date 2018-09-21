@@ -165,7 +165,7 @@ class PlayState extends FlxState
 				_jerry.flxsprite.offset.set(4,8);
 				//trace("Added Jerry at position (" + x + ", " + y +")");
 			case "Steve":
-				_steve = new ScienceSteve(mWalls, x, y);
+				_steve = new ScienceSteve(mWalls, x, y, behavior, direction, _player);
 				Character.addToPlayState(this, _steve);
 				characters.push(_steve);
 				NPCS.push(_steve);
@@ -176,7 +176,7 @@ class PlayState extends FlxState
 				_steve.flxsprite.offset.set(4,8);
 				//trace("Added Steve at position (" + x + ", " + y +")");
 			case "Ben":
-				_ben = new BurlyBen(mWalls, x, y);
+				_ben = new BurlyBen(mWalls, x, y, behavior, direction, _player);
 				Character.addToPlayState(this, _ben);
 				characters.push(_ben);
 				NPCS.push(_ben);
@@ -216,7 +216,7 @@ class PlayState extends FlxState
 				FlxG.collide(_npc.flxsprite, doors_group);
 				FlxG.collide(_npc.flxsprite, box_group);
 				if (FlxCollision.pixelPerfectCheck(_npc.flxsprite, _player.flxsprite)){
-					trace("Killed by NPC at " + _npc.flxsprite.getPosition());
+					//trace("Killed by NPC at " + _npc.flxsprite.getPosition());
 					FlxG.switchState(new PlayState());
 				}
 			//shoot taser

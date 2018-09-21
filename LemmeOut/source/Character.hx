@@ -3,8 +3,10 @@ package;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.math.FlxPoint;
 import flixel.tile.FlxTilemap;
 import flixel.FlxG;
+import flixel.util.FlxPath;
 //import flixel.system.FlxAssets.FlxGraphicAsset;
 
 /**
@@ -46,6 +48,36 @@ class Character{
 		flxsprite.animation.add(name, frames, fps, looped);
 	}
 	
+	public function pathingAnims(){
+		if (flxsprite.path != null && flxsprite.path.active){
+			var relative:FlxPoint = new FlxPoint(0,0);
+			flxsprite.path.nodes[flxsprite.path.nodeIndex].copyTo(relative);
+			relative.subtractPoint(flxsprite.getPosition());
+			if (Math.abs(relative.x) > Math.abs(relative.y)){//move horizontal
+				if (relative.x > 0){
+					flxsprite.facing = FlxObject.RIGHT;
+					flxsprite.animation.play(AnimationState.SIDE);
+					flxsprite.setFacingFlip(flxsprite.facing, true, false);
+				}
+				else if (relative.x < 0){
+					flxsprite.facing = FlxObject.LEFT;
+					flxsprite.animation.play(AnimationState.SIDE);
+					flxsprite.setFacingFlip(flxsprite.facing, false, false);
+				}
+				
+			}
+			else{//move vertical
+				if (relative.y > 0){
+					flxsprite.facing = FlxObject.DOWN;
+					flxsprite.animation.play(AnimationState.FRONT);
+				}
+				else if (relative.y < 0){
+					flxsprite.facing = FlxObject.UP;
+					flxsprite.animation.play(AnimationState.BACK);
+				}
+			}
+		}
+	}
 	public function playAnim(name:String):Void{
 		flxsprite.animation.play(name);
 	}

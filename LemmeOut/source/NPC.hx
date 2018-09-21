@@ -62,10 +62,18 @@ class NPC extends Character
 		flxsprite.path = new FlxPath();
 		start_pos = flxsprite.getMidpoint().add(16, 16);
 	}
-	
 	override public function movement(){
 		if (los() && m_state != MoveState.POSSESSED){
 			m_state = MoveState.CHASE;
+		}
+		if (is_returning && flxsprite.path != null && flxsprite.path.finished){//finished returning
+			m_state = default_behavior;
+			is_returning = false;
+			direction = start_direction;
+		}
+		else if (is_returning && flxsprite.path != null && !flxsprite.path.finished){//still pathing home
+			pathingAnims();
+			return;
 		}
 		switch(m_state){
 			case MoveState.PATROL:
@@ -79,34 +87,41 @@ class NPC extends Character
 			case MoveState.POSSESSED:
 				possessed();
 		}
+		pathingAnims();
 	}
 	
 	
 	function chase(){
+		//pathingAnims();
 		if (los()){//can see target
+			//trace("CHASE!");
 			var points:Array<FlxPoint> = walls.findPath(flxsprite.getMidpoint(), player.flxsprite.getMidpoint(), true, false, FlxTilemapDiagonalPolicy.NONE);
-			flxsprite.path.start(points, 200, FlxPath.FORWARD);
+			flxsprite.path.start(points, speed, FlxPath.FORWARD);
 			is_chasing = true;
 			is_returning = false;
 		}
 		else{ //cannot see target
 			if (is_returning){//and I'm returning to start
 				if (flxsprite.path.finished){//finished returning to start, switch states
-					trace("return to start finished, I'm at " + flxsprite.getMidpoint());
 					direction = start_direction;
 					is_returning = false;
 					is_chasing = false;
 					m_state = default_behavior;
 					FlxG.collide(flxsprite, walls);
-					trace("Behavior is now " + m_state);
 				}
 			}
 			if (flxsprite.path.finished && !is_returning && is_chasing){//and finished not yet returning and still chasing
 				var points:Array<FlxPoint> = walls.findPath(flxsprite.getMidpoint(), start_pos, true, false, FlxTilemapDiagonalPolicy.NONE);
-				flxsprite.path.start(points, 200, FlxPath.FORWARD);
-				is_returning = true;
-				is_chasing = false;
-				trace("Nothing here, returning to " + start_pos);
+				if (points != null){
+					flxsprite.path.start(points, speed, FlxPath.FORWARD);
+					is_returning = true;
+					is_chasing = false;
+				}
+				else{//no path back
+					m_state = default_behavior;
+					direction = start_direction;
+				}
+				
 			}
 		}
 		
@@ -203,7 +218,7 @@ class NPC extends Character
 			if (FlxG.keys.justPressed.SPACE) {
 				flxsprite.path = new FlxPath();
 				var points:Array<FlxPoint> = walls.findPath(flxsprite.getMidpoint(), start_pos, true, false, FlxTilemapDiagonalPolicy.NONE);
-				flxsprite.path.start(points, 200, FlxPath.FORWARD);
+				flxsprite.path.start(points, speed, FlxPath.FORWARD);
 				is_returning = true;
 				is_chasing = false;
 				m_state = default_behavior;} //lose control
