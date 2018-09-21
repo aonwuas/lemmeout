@@ -73,28 +73,28 @@
  </layer>
  <objectgroup name="obstacles">
   <object id="28" name="Basic Door 1" type="BasicDoor" x="255" y="1569" width="35" height="30"/>
-  <object id="29" name="Basic Switch 1" type="Basic Switch" x="481" y="1570" width="29" height="28">
+  <object id="29" name="Basic Switch 1" type="BasicSwitch" x="481" y="1570" width="29" height="28">
    <properties>
     <property name="Pressure" type="bool" value="false"/>
     <property name="Subject" value="Basic Door 1"/>
    </properties>
   </object>
   <object id="30" name="BasicDoor2" type="BasicDoor" x="384" y="1412" width="30" height="28"/>
-  <object id="31" name="Basic Switch 2" type="Basic Switch" x="384" y="1762" width="31" height="30">
+  <object id="31" name="Basic Switch 2" type="BasicSwitch" x="384" y="1762" width="31" height="30">
    <properties>
     <property name="Pressure" type="bool" value="false"/>
     <property name="Subject" value="Basic Door 2"/>
    </properties>
   </object>
   <object id="32" name="Basic Door 3" type="Basic Door" x="384" y="1344" width="31" height="33"/>
-  <object id="33" name="Basic Switch 3" type="Basic Switch" x="384" y="1890" width="31" height="30">
+  <object id="33" name="Basic Switch 3" type="BasicSwitch" x="384" y="1890" width="31" height="30">
    <properties>
     <property name="Pressure" type="bool" value="false"/>
     <property name="Subject" value="Basic Door 3"/>
    </properties>
   </object>
   <object id="34" name="Basic Door 4" type="Basic Door" x="256" y="1282" width="30" height="31"/>
-  <object id="35" name="Basic Switch 4" type="Basic Switch" x="384" y="2020" width="30" height="26">
+  <object id="35" name="Basic Switch 4" type="BasicSwitch" x="384" y="2020" width="30" height="26">
    <properties>
     <property name="Pressure" type="bool" value="false"/>
     <property name="Subject" value="Basic Door 4"/>
@@ -109,7 +109,7 @@
     <property name="Subject" value="lastDoor2"/>
    </properties>
   </object>
-  <object id="41" name="lastSwitch2" type="Basic Switch" x="801" y="1728" width="29" height="28">
+  <object id="41" name="lastSwitch2" type="BasicSwitch" x="801" y="1728" width="29" height="28">
    <properties>
     <property name="Pressure" type="bool" value="false"/>
     <property name="Subject" value="lastDoor2"/>
@@ -125,19 +125,19 @@
     <property name="Subject" value="lastDoor2"/>
    </properties>
   </object>
-  <object id="46" name="Basic Switch 5" type="Basic Switch" x="642" y="1057" width="29" height="29">
+  <object id="46" name="Basic Switch 5" type="BasicSwitch" x="642" y="1057" width="29" height="29">
    <properties>
     <property name="Pressure" type="bool" value="true"/>
     <property name="Subject" value="bdoor1"/>
    </properties>
   </object>
-  <object id="47" name="Basic Switch 8" type="Basic Switch" x="384" y="1089" width="31" height="31">
+  <object id="47" name="Basic Switch 8" type="BasicSwitch" x="384" y="1089" width="31" height="31">
    <properties>
     <property name="Pressure" type="bool" value="false"/>
     <property name="Subject" value="Basic Door 8"/>
    </properties>
   </object>
-  <object id="48" name="Basic Switch 7" type="Basic Switch" x="386" y="832" width="28" height="31">
+  <object id="48" name="Basic Switch 7" type="BasicSwitch" x="386" y="832" width="28" height="31">
    <properties>
     <property name="Pressure" type="bool" value="false"/>
     <property name="Subject" value="Basic Door 7"/>
@@ -147,13 +147,13 @@
   <object id="50" name="Basic Door 6" type="Basic Door" x="673" y="961" width="30" height="30"/>
   <object id="51" name="Basic Door 8" type="Basic Door" x="226" y="797" width="28" height="36"/>
   <object id="52" name="Basic Door 5" type="Basic Door" x="736" y="961" width="31" height="29"/>
-  <object id="53" name="Basic Switch 6" type="Basic Switch" x="738" y="578" width="27" height="28">
+  <object id="53" name="Basic Switch 6" type="BasicSwitch" x="738" y="578" width="27" height="28">
    <properties>
     <property name="Pressure" type="bool" value="true"/>
     <property name="Subject" value="Basic Door 6"/>
    </properties>
   </object>
-  <object id="54" name="Basic Switch 9" type="Basic Switch" x="95" y="928" width="32" height="31">
+  <object id="54" name="Basic Switch 9" type="BasicSwitch" x="95" y="928" width="32" height="31">
    <properties>
     <property name="Pressure" type="bool" value="true"/>
     <property name="Subject" value="bdoor2"/>
@@ -165,7 +165,7 @@
     <property name="Subject" value="lastDoor4"/>
    </properties>
   </object>
-  <object id="57" name="lastSwitch1" type="Basic Switch" x="801" y="1794" width="27" height="27">
+  <object id="57" name="lastSwitch1" type="BasicSwitch" x="801" y="1794" width="27" height="27">
    <properties>
     <property name="Pressure" type="bool" value="false"/>
     <property name="Subject" value="lastDoor1"/>
@@ -181,13 +181,13 @@
     <property name="Subject" value="lastDoor3"/>
    </properties>
   </object>
-  <object id="60" name="lastSwitch3" type="Basic Switch" x="801" y="1664" width="28" height="30">
+  <object id="60" name="lastSwitch3" type="BasicSwitch" x="801" y="1664" width="28" height="30">
    <properties>
     <property name="Pressure" type="bool" value="false"/>
     <property name="Subject" value="lastDoor4"/>
    </properties>
   </object>
-  <object id="61" name="lastSwitch4" type="Basic Switch" x="801" y="1602" width="30" height="29">
+  <object id="61" name="lastSwitch4" type="BasicSwitch" x="801" y="1602" width="30" height="29">
    <properties>
     <property name="Pressure" type="bool" value="false"/>
     <property name="Subject" value="lastDoor4"/>
@@ -224,7 +224,7 @@
     <property name="Character" value="Jerry"/>
    </properties>
   </object>
-  <object id="71" name="Basic Switch 10" type="Basic Switch" x="223.5" y="1826" width="29" height="28">
+  <object id="71" name="Basic Switch 10" type="BasicSwitch" x="223.5" y="1826" width="29" height="28">
    <properties>
     <property name="Pressure" type="bool" value="false"/>
     <property name="Subject" value="Basic Door 10"/>
