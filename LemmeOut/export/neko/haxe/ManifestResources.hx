@@ -93,6 +93,7 @@ null
 @:keep @:bind #if display private #end class __ASSET__assets_data_background_tsx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_data_goes_here_txt extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_level2_tmx extends null { }
+@:keep @:bind #if display private #end class __ASSET__assets_data_level2part2_tmx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels_level1_tmx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_levels_walltilesheet_tsx extends null { }
 @:keep @:bind #if display private #end class __ASSET__assets_data_test_tmx extends null { }

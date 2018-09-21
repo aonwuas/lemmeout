@@ -14,14 +14,13 @@ import flixel.util.FlxCollision;
 import flixel.FlxG;
 import Character.MoveState;
 
-class PlayState extends FlxState
+class PlayState2 extends FlxState
 {
 	
 	var _player:Player;
 	var _jerry:JanitorJerry;
 	var _steve:ScienceSteve;
 	var _ben:BurlyBen;
-	public var end:FlxSprite;
 	public var _bullet:FlxSprite;
 	public var _taser:FlxSprite;
 	public var walls:FlxObject;
@@ -38,8 +37,9 @@ class PlayState extends FlxState
 
 	override public function create():Void
 	{
+		trace("Times create has been run: " + (times_run += 1));
 		FlxG.mouse.visible = false;
-		_map = new TiledMap(AssetPaths.test2__tmx);
+		_map = new TiledMap(AssetPaths.level2__tmx);
 		_mWalls = new FlxTilemap();
 		_mWalls.loadMapFromArray(cast(_map.getLayer("floor"), TiledTileLayer).tileArray, _map.width, _map.height, AssetPaths.background__png, _map.tileWidth, _map.tileHeight, FlxTilemapAutoTiling.OFF, 1, 1, 3);
 		_mWalls.follow();
@@ -112,9 +112,6 @@ class PlayState extends FlxState
 					spawnCharacter(character, x, y, mWalls);
 				case "Box":
 					box_group.add(new Box(x, y));
-				case "End":
-					end = new FlxSprite(x, y);
-					add(end);
 			}
 		}
 	}
@@ -189,14 +186,6 @@ class PlayState extends FlxState
 
 	override public function update(elapsed:Float):Void
 	{
-		//testing purposes: END GAME
-		if (_player.end_game){ FlxG.switchState(new EndState()); }
-		
-		if (FlxCollision.pixelPerfectCheck(_player.flxsprite, end))
-		{
-			FlxG.switchState(new PlayState2());
-		}
-
 		//shoot bullet
 		if (_player.controlled && FlxG.keys.justPressed.E){ add(_bullet); }
 		FlxG.collide(_bullet, doors_group);
@@ -223,6 +212,7 @@ class PlayState extends FlxState
 				if (FlxG.collide(_npc.flxsprite, box) && _npc.getName() == "ben")
 				{ //Ben moves box
 					box.soften();
+					trace("yeet");
 				}
 			}
 		}
