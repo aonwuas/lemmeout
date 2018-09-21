@@ -1,5 +1,6 @@
 package;
 
+import flixel.tile.FlxBaseTilemap;
 import flixel.FlxObject;
 import flixel.math.FlxVector;
 import haxe.Timer;
@@ -7,6 +8,7 @@ import flixel.tile.FlxTilemap;
 import Character.AnimationState;
 import Character.MoveState;
 import flixel.FlxG;
+import flixel.util.FlxPath;
 import flixel.math.FlxPoint;
 /**
  * ...
@@ -25,9 +27,12 @@ class NPC extends Character
 	var _justX:Bool = false;
 	var _justY:Bool = false;
 	var sees_player:Bool = false;
-	var last_seen:Int = null;
+	var last_seen:FlxPoint = null;
 	var start_pos:FlxPoint;
 	var relative:FlxVector;
+	var is_chasing:Bool = false;
+	var is_returning:Bool = false;
+	var start_direction:Int;
 		
 	public function new(colliders:FlxTilemap, ?x:Float=0, ?y:Float=0, ?start_behavior:MoveState = MoveState.PATROL, ?target:Player=null) 
 	{
@@ -35,11 +40,17 @@ class NPC extends Character
 		default_behavior = start_behavior;
 		m_state = MoveState.PATROL;
 		direction = FlxObject.DOWN;
+		start_direction = direction;
 		player = target;
+		flxsprite.path = new FlxPath();
+		start_pos = flxsprite.getMidpoint().add(16, 16);
+		trace(start_pos);
 	}
 	
 	public function movement(){
-		checkVision();
+		if (los() && m_state != MoveState.POSSESSED){
+			m_state = MoveState.CHASE;
+		}
 		switch(m_state){
 			case MoveState.PATROL:
 				patrol();
@@ -48,71 +59,48 @@ class NPC extends Character
 			case MoveState.LOOK:
 				look();
 			case MoveState.CHASE:
-				chase(last_seen);
+				chase();
 			case MoveState.POSSESSED:
 				possessed();
 		}
 	}
 	
-	function checkVision():Void{
-		sees_player = false;
-		if (player == null){
-			 return;
-		 }
-		 if (walls.ray(flxsprite.getMidpoint(), player.flxsprite.getMidpoint()))
-		 {
-			 relative = (player.flxsprite.getMidpoint().toVector().subtractNew(flxsprite.getMidpoint().toVector()));
-			 if (Math.abs(relative.x) > Math.abs(relative.y)){//Along X axis
-				if (relative.x >= 0){ //To the right
-					if (direction != FlxObject.LEFT){
-						sees_player = true;
-						warp(flxsprite.x, weird_round(flxsprite.y, 32));
-						last_seen = FlxObject.RIGHT;
-					}
-				}
-				else{ //To the left
-					if (direction != FlxObject.RIGHT){
-						sees_player = true;
-						warp(flxsprite.x, weird_round(flxsprite.y, 32));
-						last_seen = FlxObject.LEFT;
-					}
-				}
-			 }
-			 else{//Along y axis
-				if (relative.y <= 0){ //Above
-					if (direction != FlxObject.DOWN){
-						sees_player = true;
-						warp(weird_round(flxsprite.x, 32), flxsprite.y);
-						last_seen = FlxObject.UP;
-					}
-				}
-				else{ //Below
-					if (direction != FlxObject.UP){
-						sees_player = true;
-						warp(weird_round(flxsprite.x, 32), flxsprite.y);
-						last_seen = FlxObject.DOWN;
-					}
-				} 
-			 }
-		 }
-		 if (sees_player){
-			m_state = MoveState.CHASE;
-		 }
-		 else{
-			 m_state = default_behavior;
-		 }
-	 }
 	
-	
-	function chase(thisway:Int){
-		trace(weird_round(flxsprite.x, 32));
-		move(thisway);
+	function chase(){
+		if (los()){//can see target
+			var points:Array<FlxPoint> = walls.findPath(flxsprite.getMidpoint(), player.flxsprite.getMidpoint(), true, false, FlxTilemapDiagonalPolicy.NONE);
+			flxsprite.path.start(points, 200, FlxPath.FORWARD);
+			is_chasing = true;
+			is_returning = false;
+		}
+		else{ //cannot see target
+			if (is_returning){//and I'm returning to start
+				if (flxsprite.path.finished){//finished returning to start, switch states
+					trace("return to start finished, I'm at " + flxsprite.getMidpoint());
+					direction = start_direction;
+					is_returning = false;
+					is_chasing = false;
+					m_state = default_behavior;
+					FlxG.collide(flxsprite, walls);
+					trace("Behavior is now " + m_state);
+				}
+			}
+			if (flxsprite.path.finished && !is_returning && is_chasing){//and finished not yet returning and still chasing
+				var points:Array<FlxPoint> = walls.findPath(flxsprite.getMidpoint(), start_pos, true, false, FlxTilemapDiagonalPolicy.NONE);
+				flxsprite.path.start(points, 200, FlxPath.FORWARD);
+				is_returning = true;
+				is_chasing = false;
+				trace("Nothing here, returning to " + start_pos);
+			}
+		}
+		
 	}
 	
-	function weird_round(num:Float, base:Float):Float{
-		var row:Int = Math.floor(num / base);
-		return (base * row);
+	function los():Bool{
+		return walls.ray(flxsprite.getMidpoint(), player.flxsprite.getMidpoint());
 	}
+	
+	
 	public function getPossessed(){
 		m_state = MoveState.POSSESSED;
 		switch(direction){
@@ -169,7 +157,12 @@ class NPC extends Character
 				if (x == -1) { move(FlxObject.LEFT, m_state); }
 			}
 
-			if (FlxG.keys.justPressed.SPACE) { m_state = default_behavior;} //lose control
+			if (FlxG.keys.justPressed.SPACE) {
+				var points:Array<FlxPoint> = walls.findPath(flxsprite.getMidpoint(), start_pos, true, false, FlxTilemapDiagonalPolicy.NONE);
+				flxsprite.path.start(points, 200, FlxPath.FORWARD);
+				is_returning = true;
+				is_chasing = false;
+				m_state = default_behavior;} //lose control
 	}
 	
 	function look(){

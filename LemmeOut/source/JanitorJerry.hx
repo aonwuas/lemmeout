@@ -10,7 +10,7 @@ class JanitorJerry extends NPC
 	static var graphic:String = "assets/images/GD1_JerrySheet_walks.png";
 	static var width:Int = 32;
 	static var height:Int = 32;
-	static var spd:Float = 200;
+	static var spd:Float = 150;
 	
 	public function new(colliders:FlxTilemap, ?x:Float=0, ?y:Float=0, ?player:Player=null) 
 	{
